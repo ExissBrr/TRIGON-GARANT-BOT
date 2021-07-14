@@ -3,7 +3,7 @@ from aiogram.types import Message
 
 from app import keyboards, dp
 from app.data import text
-from app.data.types.user import UserDeepLink, UserRole
+from app.data.types.user_data import UserDeepLink, UserRole
 from app.filters.private.user import NewUser
 from app.loader import links, config
 from app.states.private.registration_new_user import RegistrationNewUser
@@ -38,9 +38,9 @@ async def message_on(message: Message, lang_code):
 
     await message.answer_video(
         video=links.video.window_windows_xp,
-        caption=text[lang_code].message.default.welcome.format(
+        caption=text[lang_code].default.message.welcome.format(
             user_fullname=format_fullname(user.fullname),
-            default_lang=format_lang_code(config.bot.default_lang)
+            default_lang=format_lang_code(config.bot.languages[0])
         ),
         reply_markup=keyboards.default.reply.menu_settings.languages.keyboard()
     )

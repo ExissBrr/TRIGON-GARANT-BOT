@@ -1,0 +1,3 @@
+<b>My Profile</b>
+<b>ID:</b> <code>{user_id}</code>
+<b>Username:</b> {user_username}

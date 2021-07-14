@@ -1,0 +1,38 @@
+version: "3.1"
+
+services:
+  db:
+    container_name: postgres_template
+    image: sameersbn/postgresql:10-2
+    environment:
+      PG_PASSWORD: $db_pass
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - botnet
+    volumes:
+      - ./pgdata:/var/lib/postgresql
+    env_file:
+      - ".config.ini"
+
+  tgbot:
+    container_name: bot_template
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python main.py
+    restart: always
+    networks:
+      - botnet
+    env_file:
+      - ".config.ini"
+    depends_on:
+      - db_template
+    volumes:
+      - .:/src
+
+
+networks:
+  botnet:
+    driver: bridge

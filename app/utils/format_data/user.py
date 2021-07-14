@@ -12,7 +12,7 @@ def format_username(username: str) -> str:
     """
 
     if str(username) == 'None':
-        username = 'User has not username'
+        username = 'Not username'
     else:
         username = '@' + username
 

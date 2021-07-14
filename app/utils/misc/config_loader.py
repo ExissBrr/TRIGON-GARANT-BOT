@@ -2,7 +2,7 @@ import configparser
 
 from loguru import logger
 
-from app.data.config import BotConfig, Config, DatabaseConfig
+from app.data.types.config import BotConfig, Config, DatabaseConfig
 
 
 class ConfigLoader:
@@ -30,8 +30,7 @@ class ConfigLoader:
     def _get_bot_config(self) -> BotConfig:
         bot_config = BotConfig(
             self._config['BotConfig']['token'],
-            self._config['BotConfig']['default_lang'],
-            self._config['BotConfig']['second_lang'] or self._config['BotConfig']['default_lang'],
+            self._config['BotConfig']['languages'].split(),
             int(self._config['BotConfig']['admin_id']),
             [int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
             self.get_bot_commands

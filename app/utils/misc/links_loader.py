@@ -2,7 +2,7 @@ import configparser
 
 from loguru import logger
 
-from app.data.links import Links, MiscLinks, TelegraphLinks, PhotoLinks, VideoLinks, DocumentLinks
+from app.data.types.links import Links, MiscLinks, TelegraphLinks, PhotoLinks, VideoLinks, DocumentLinks
 
 
 class LinksLoader:

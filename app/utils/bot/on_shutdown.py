@@ -1,6 +1,6 @@
 from aiogram import Dispatcher
 
-from app.data.types.user import UserRole
+from app.data.types.user_data import UserRole
 from app.loader import config
 from app.utils.bot import sending_message
 from app.utils.bot.set_commands import set_bot_commands

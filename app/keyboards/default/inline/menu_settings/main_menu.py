@@ -11,13 +11,13 @@ def keyboard(lang_code) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text=text[lang_code].button.default.inline.menu_settings_lang_code,
+                    text=text[lang_code].default.button.inline.menu_settings_lang_code,
                     callback_data=menu_settings_cd.new(menu=MenuSettingsCD.menu_settings_lang_code)
                 )
             ],
             [
                 InlineKeyboardButton(
-                    text=text[lang_code].button.default.inline.upload_user_data,
+                    text=text[lang_code].default.button.inline.upload_user_data,
                     callback_data=menu_settings_cd.new(menu=MenuSettingsCD.upload_user_data)
                 )
             ]

@@ -25,10 +25,10 @@ class AntiFloodMiddleware(BaseMiddleware):
         if throttled.exceeded_count < 5:
             return False
         elif throttled.exceeded_count < 8:
-            await message.answer(text=text[await self.lang_code(message)].message.default.antiflood_warning)
+            await message.answer(text=text[await self.lang_code(message)].default.message.antiflood_warning)
             return False
         elif throttled.exceeded_count == 8:
-            await message.reply(text=text[await self.lang_code(message)].message.default.antiflood_mute)
+            await message.reply(text=text[await self.lang_code(message)].default.message.antiflood_mute)
             return True
         else:
             return True
@@ -37,4 +37,4 @@ class AntiFloodMiddleware(BaseMiddleware):
         user = await User.get(message.from_user.id)
         if user:
             return user.lang_code
-        return config.bot.default_lang
+        return config.bot.languages[0]

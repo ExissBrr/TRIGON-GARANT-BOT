@@ -26,6 +26,6 @@ class NotSubscribedChat(BoundFilter):
                 continue
             links_chat_not_subscribed[chat.title] = chat.invite_link
         if links_chat_not_subscribed:
-            return {'data_filter': links_chat_not_subscribed}
+            return {'links_chat': links_chat_not_subscribed}
 
         return False

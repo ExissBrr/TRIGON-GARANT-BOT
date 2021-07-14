@@ -1,7 +1,6 @@
 [BotConfig]
 token=Your token bot
-default_lang=rus
-second_lang=
+languages=ru eng
 admin_id=0
 chats_id=
 

@@ -16,7 +16,7 @@ async def menu_choice_language(call: CallbackQuery, callback_data: dict, user):
     await call.answer(format_lang_code(user.lang_code))
 
     await call.message.edit_text(
-        text=text[lang_code].message.default.menu_choice_language,
+        text=text[lang_code].default.message.menu_choice_language,
         reply_markup=keyboards.default.inline.menu_settings.languages.keyboard(user)
     )
 

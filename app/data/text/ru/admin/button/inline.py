@@ -1,0 +1,1 @@
+btn = 'admin_inline_btn'

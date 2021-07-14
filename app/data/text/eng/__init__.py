@@ -1,2 +1,2 @@
-from . import button
-from . import message
+from . import admin
+from . import default

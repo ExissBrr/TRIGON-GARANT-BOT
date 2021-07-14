@@ -3,7 +3,7 @@ from typing import List, Union
 
 from sqlalchemy import Column, BigInteger, String, Boolean, DateTime
 
-from app.data.types.user import UserRole, UserDeepLink, UserPhone, UserDataHistory
+from app.data.types.user_data import UserRole, UserDeepLink, UserPhone, UserDataHistory
 from app.loader import config
 from app.utils.db_api.db import BaseModel
 
@@ -14,7 +14,7 @@ class User(BaseModel):
     id: int = Column(BigInteger, primary_key=True)
     username: str = Column(String(32))
     fullname: str = Column(String(128))
-    lang_code: str = Column(String(10), default=config.bot.default_lang)
+    lang_code: str = Column(String(10), default=config.bot.languages[0])
     deep_link: int = Column(BigInteger, default=UserDeepLink.NONE)
 
     phone: str = Column(String(24), default=UserPhone.NONE)

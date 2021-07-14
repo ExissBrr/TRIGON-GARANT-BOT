@@ -13,6 +13,18 @@ async def text_message(text: str,
                        markup: InlineKeyboardMarkup = None,
                        **where_conditions
                        ) -> List[int]:
+    """
+    Sends a message to users and chats.
+    Args:
+        text (str): Message text.
+        roles (Union[str, List[str]]): User roles.
+        chats_id (Union[int, List[int]]): Chats id
+        markup (InlineKeyboardMarkup): Inline keyboard markup (url)
+        **where_conditions ():
+
+    Returns:
+        Conditions for database queries.
+    """
     bot = Bot.get_current()
     list_not_success = []
 
@@ -23,10 +35,14 @@ async def text_message(text: str,
     elif isinstance(chats_id, str):
         chats_id = [int(chats_id)]
 
+    users = []
     if roles is not None:
-        users = []
         for role in roles:
-            users + await db.all(User.query.where(User.qf(role=role, **where_conditions)))
+            users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
+    else:
+        users.extend(await db.all(User.query.where(User.qf(**where_conditions))))
+
+    chats_id.extend([user.id for user in users])
 
     for chat_id in set(chats_id):
         try:
@@ -58,10 +74,14 @@ async def copy_message(message: Message,
     elif isinstance(chats_id, str):
         chats_id = [int(chats_id)]
 
+    users = []
     if roles is not None:
-        users = []
         for role in roles:
-            users + await db.all(User.query.where(User.qf(role=role, **where_conditions)))
+            users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
+    else:
+        users.extend(await db.all(User.query.where(User.qf(**where_conditions))))
+
+    chats_id.extend([user.id for user in users])
 
     for chat_id in set(chats_id):
         try:
@@ -83,6 +103,8 @@ async def forward_message(message: Message,
                           chats_id: List[int] = None,
                           **where_conditions
                           ) -> List[int]:
+
+
     bot = Bot.get_current()
     list_not_success = []
 
@@ -93,10 +115,14 @@ async def forward_message(message: Message,
     elif isinstance(chats_id, str):
         chats_id = [int(chats_id)]
 
+    users = []
     if roles is not None:
-        users = []
         for role in roles:
-            users + await db.all(User.query.where(User.qf(role=role, **where_conditions)))
+            users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
+    else:
+        users.extend(await db.all(User.query.where(User.qf(**where_conditions))))
+
+    chats_id.extend([user.id for user in users])
 
     for chat_id in set(chats_id):
         try:
