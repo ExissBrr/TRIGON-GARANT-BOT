@@ -16,7 +16,7 @@ async def banned_user(message: Message, lang_code):
         )
         return False
     user_data = args.pop(0)
-    user = await User.query.where(User.qf(op='or', id=user_data, username=user_data))
+    user = await User.query.where(User.qf(op='or', id=user_data, username=user_data)).gino.first()
 
     if not user:
         await message.answer(
@@ -30,7 +30,7 @@ async def banned_user(message: Message, lang_code):
         )
         return False
 
-    await user.update_data(is_banned=True, reason_for_blocking=' '.join(args))
+    await user.update_data(is_blocked=True, reason_for_blocking=' '.join(args))
     await message.answer(
         text=text[lang_code].admin.message.successfull_banned_user
     )
