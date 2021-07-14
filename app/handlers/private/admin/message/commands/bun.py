@@ -15,11 +15,12 @@ async def banned_user(message: Message, lang_code):
             text=text[lang_code].admin.message.error_command_args
         )
         return False
-    user = await User.query.where(User.qf(op='or', id=args[0], username=args[0]))
+    user_data = args.pop(0)
+    user = await User.query.where(User.qf(op='or', id=user_data, username=user_data))
 
     if not user:
         await message.answer(
-            text=text[lang_code].admin.message.error_search_user_not_found.format(search_data=args.pop(0))
+            text=text[lang_code].admin.message.error_search_user_not_found.format(search_data=user_data)
         )
         return False
 
@@ -33,5 +34,3 @@ async def banned_user(message: Message, lang_code):
     await message.answer(
         text=text[lang_code].admin.message.successfull_banned_user
     )
-
-
