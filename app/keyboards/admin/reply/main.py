@@ -9,6 +9,9 @@ def keyboard(lang_code) -> ReplyKeyboardMarkup:
         keyboard=[
             [
                 KeyboardButton(text[lang_code].default.button.reply.profile)
+            ],
+            [
+                KeyboardButton(text[lang_code].admin.button.reply.message_sending)
             ]
         ]
     )

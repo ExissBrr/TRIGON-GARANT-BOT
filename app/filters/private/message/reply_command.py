@@ -26,5 +26,3 @@ class ReplyCommand(BoundFilter):
                     for lang in self.langs:
                         if text[lang].default.button.reply.__dict__.get(key) == message.text:
                             return True
-
-

@@ -2,7 +2,7 @@ import datetime
 
 from aiogram.types import ContentType
 from loguru import logger
-from sqlalchemy import Column, BigInteger, Sequence, String, Integer, DateTime
+from sqlalchemy import Column, BigInteger, Sequence, String, Integer, DateTime, Boolean
 
 from app.utils.db_api.db import BaseModel
 
@@ -10,6 +10,7 @@ from app.utils.db_api.db import BaseModel
 class MessageForSending(BaseModel):
     __tablename__ = 'messages_for_sending_template'
     id: int = Column(BigInteger, Sequence('message_for_sending_id'))
+    is_active: bool = Column(Boolean, default=True)
     content_type: str = Column(String, default=ContentType.TEXT)
     media_id: str = Column(String)
     text: str = Column(String(200))
