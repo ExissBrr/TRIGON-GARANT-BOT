@@ -21,7 +21,7 @@ async def message_on(message: Message, user, lang_code):
 
     await message.answer_video(
         video=links.video.read_rules,
-        caption=text[lang_code].default.text.please_read_the_rules,
+        caption=text[lang_code].default.message.please_read_the_rules,
         reply_markup=reply.agree_rules.keyboard(lang_code)
     )
 
@@ -30,7 +30,7 @@ async def message_on(message: Message, user, lang_code):
     }
 
     await message.answer(
-        text=text[lang_code].default.text.links_to_rules,
+        text=text[lang_code].default.message.links_to_rules,
         reply_markup=generator_button_url.keyboard(links_data)
     )
     await RegistrationNewUser.agree_rules.set()

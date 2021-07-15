@@ -1,6 +1,5 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ContentType
-from loguru import logger
 
 from app.loader import dp
 from app.utils.bot import send_main_keyboard

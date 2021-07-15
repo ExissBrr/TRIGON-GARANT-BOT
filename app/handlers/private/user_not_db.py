@@ -13,5 +13,5 @@ from app.loader import dp
 async def user_not_db(obj: Union[Message, CallbackQuery], lang_code):
     await dp.bot.send_message(
         chat_id=obj.from_user.id,
-        text=text[lang_code].default.text.user_not_found_in_user_database
+        text=text[lang_code].default.message.user_not_found_in_user_database
     )
