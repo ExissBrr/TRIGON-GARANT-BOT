@@ -5,6 +5,7 @@ from app.data import text
 
 def keyboard(lang_code):
     markup = ReplyKeyboardMarkup(
+        resize_keyboard=True,
         keyboard=[
             [
                 KeyboardButton(

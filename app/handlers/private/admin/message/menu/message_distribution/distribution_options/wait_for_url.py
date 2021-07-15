@@ -1,5 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
+from loguru import logger
 
 from app.data import text
 from app.loader import dp
@@ -9,15 +10,16 @@ from app.states.private.message_distribution import MessageSending
 @dp.message_handler(state=MessageSending.wait_for_url)
 async def wait_for_media(message: Message, state: FSMContext, lang_code):
     raw_data = message.text.split()
-    links = ''
+    links = {}
     for data in raw_data:
         try:
+            data = data.replace('https://', '').replace('http://', '')
             title, link = data.split(':')
-            if 'http' in link:
-                links += f"{title}:{link} "
+            logger.debug(f"{title} {link}")
+            links.setdefault(title, link)
         except Exception:
             pass
-    links = links.strip()
+    logger.debug(links)
     await state.update_data(urls=links)
     await message.answer(
         text=text[lang_code].admin.message.send_media
