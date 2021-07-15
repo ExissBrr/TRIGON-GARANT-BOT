@@ -9,7 +9,7 @@ from app.utils.db_api.db import BaseModel
 
 class MessageForSending(BaseModel):
     __tablename__ = 'messages_for_sending_template'
-    id: int = Column(BigInteger, Sequence('message_for_sending_id'))
+    id: int = Column(BigInteger, Sequence('message_for_sending_id'), primary_key=True)
     is_active: bool = Column(Boolean, default=True)
     content_type: str = Column(String, default=ContentType.TEXT)
     media_id: str = Column(String)

@@ -6,7 +6,7 @@ from app.loader import dp
 from app.states.private.message_distribution import MessageSending
 
 
-@dp.message_handler(state=MessageSending.wait_for_media,content_types=ContentType.ANY)
+@dp.message_handler(state=MessageSending.wait_for_media, content_types=ContentType.ANY)
 async def wait_for_media(message: Message, state: FSMContext, lang_code):
     if message.content_type is ContentType.VIDEO:
         video_id = message.video.file_id

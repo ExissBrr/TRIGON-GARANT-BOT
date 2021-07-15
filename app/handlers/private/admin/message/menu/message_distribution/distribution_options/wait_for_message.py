@@ -11,7 +11,7 @@ from app.states.private.message_distribution import MessageSending
 async def wait_for_url(message: Message, state: FSMContext,lang_code):
     if not message:
         await message.answer(
-            text='Неккоректные данные'
+            text=text[lang_code].default.message.worng_data
         )
     await state.update_data(mess=message.text)
     await message.answer(

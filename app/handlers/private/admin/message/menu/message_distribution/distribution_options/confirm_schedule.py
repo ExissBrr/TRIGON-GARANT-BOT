@@ -28,6 +28,6 @@ async def add_schedule_in_db(message: Message, state: FSMContext, user, lang_cod
         time=distribution_time
     )
     await message.answer(
-        text='Запись добавлена!'
+        text=text[lang_code].default.message.added
     )
     await send_main_keyboard(user, state)

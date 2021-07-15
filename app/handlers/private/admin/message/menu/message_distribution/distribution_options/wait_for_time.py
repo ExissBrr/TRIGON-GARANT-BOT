@@ -24,12 +24,13 @@ async def wait_for_confirmation(message: Message, state: FSMContext, lang_code, 
     await state.update_data(time=message.text)
 
     distribution_message = state_data.get('mess', None)
-    distribution_urls: dict = state_data.get('urls', None)
+    distribution_urls = state_data.get('urls', None)
     distribution_media = state_data.get('media_id', None)
     distribution_media_type = state_data.get('media_type', None)
     view_text = text[lang_code].admin.message.message_preview.format(
         text=distribution_message,
-        time=message.text)
+        time=message.text
+    )
     if distribution_media:
         if distribution_media_type == ContentType.VIDEO:
             await message.answer_video(
