@@ -1,7 +1,6 @@
 from typing import List
 
 from aiogram import Bot
-from loguru import logger
 
 from app.data.types.user_data import UserRole
 from app.utils.bot import sending_message
@@ -9,11 +8,13 @@ from app.utils.db_api.models.user import User
 
 
 async def update_users_data():
-    users: List[User] = await User.query.gino.all()
     bot = Bot.get_current()
 
-    count_updates = 0
+    await sending_message.text_message('Бот отключается на технические работы')
 
+    users: List[User] = await User.query.gino.all()
+
+    count_updates = 0
     for user_database in users:
 
         # User from telegram

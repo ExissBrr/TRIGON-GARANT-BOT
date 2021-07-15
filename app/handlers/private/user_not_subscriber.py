@@ -14,6 +14,6 @@ from app.loader import dp
 async def not_subscriber(obj: Union[Message, CallbackQuery], lang_code, links_chat):
     await obj.bot.send_message(
         chat_id=obj.from_user.id,
-        text=text[lang_code].default.text.subscribe_to_the_chat,
+        text=text[lang_code].default.message.subscribe_to_the_chat,
         reply_markup=generator_button_url.keyboard(links_chat)
     )

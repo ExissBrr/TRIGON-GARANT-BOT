@@ -10,6 +10,6 @@ from app.loader import dp
 async def answer(obj, lang_code):
     await dp.bot.send_message(
         chat_id=obj.from_user.id,
-        text=text[lang_code].default.text.bun_answer,
+        text=text[lang_code].default.message.bun_answer,
         reply_markup=ReplyKeyboardRemove()
     )

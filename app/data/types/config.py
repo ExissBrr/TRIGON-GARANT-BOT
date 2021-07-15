@@ -9,6 +9,7 @@ class BotConfig:
     admin_id: int
     chats_id: List[int]
     commands: dict
+    is_active: bool = True
 
 
 @dataclass

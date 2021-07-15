@@ -34,6 +34,10 @@ class BaseModel(db.Model):
         await model.create()
 
     @classmethod
+    def func_count(cls):
+        return db.select([db.func.count(cls.id)])
+
+    @classmethod
     def qf(cls, op: str = 'and', **kwargs):
         """
         Query filter
