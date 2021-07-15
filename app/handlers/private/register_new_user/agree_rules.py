@@ -12,7 +12,7 @@ from app.states.private.registration_new_user import RegistrationNewUser
 async def agree_rules(message: Message, state: FSMContext, user, lang_code):
     await state.finish()
     await message.answer(
-        text=text[lang_code].default.message.good
+        text=text[lang_code].default.text.good
     )
     await user.update_data(is_read_rules=True)
     raise SkipHandler()

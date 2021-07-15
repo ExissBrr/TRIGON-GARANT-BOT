@@ -1,7 +1,8 @@
 from typing import List, Union
 
 from aiogram import Bot
-from aiogram.types import InlineKeyboardMarkup, Message
+from aiogram.types import InlineKeyboardMarkup, Message, ContentType
+from loguru import logger
 
 from app.utils.db_api import db
 from app.utils.db_api.models.user import User
@@ -11,6 +12,8 @@ async def text_message(text: str,
                        roles: Union[str, List[str]] = None,
                        chats_id: Union[int, List[int]] = None,
                        markup: InlineKeyboardMarkup = None,
+                       content_type: str = ContentType.TEXT,
+                       file_id: str = None,
                        **where_conditions
                        ) -> List[int]:
     """
@@ -37,6 +40,9 @@ async def text_message(text: str,
 
     users = []
     if roles is not None:
+        if not isinstance(roles, list):
+            roles = [roles]
+
         for role in roles:
             users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
     else:
@@ -46,12 +52,37 @@ async def text_message(text: str,
 
     for chat_id in set(chats_id):
         try:
-            await bot.send_message(
-                chat_id=chat_id,
-                text=text,
-                reply_markup=markup
-            )
-        except:
+            if content_type == ContentType.TEXT:
+                await bot.send_message(
+                    chat_id=chat_id,
+                    text=text,
+                    reply_markup=markup
+                )
+            elif content_type == ContentType.PHOTO:
+                await bot.send_photo(
+                    photo=file_id,
+                    chat_id=chat_id,
+                    caption=text,
+                    reply_markup=markup
+                )
+            elif content_type == ContentType.DOCUMENT:
+                await bot.send_document(
+                    document=file_id,
+                    chat_id=chat_id,
+                    caption=text,
+                    reply_markup=markup
+                )
+            elif content_type == ContentType.VIDEO:
+                await bot.send_video(
+                    video=file_id,
+                    chat_id=chat_id,
+                    caption=text,
+                    reply_markup=markup
+                )
+        except Exception as ex:
+            user_not_active: User = await User.get(chat_id)
+            if user_not_active:
+                await user_not_active.update_data(is_active=False)
             list_not_success.append(chat_id)
             continue
 
@@ -76,6 +107,9 @@ async def copy_message(message: Message,
 
     users = []
     if roles is not None:
+        if not isinstance(roles, list):
+            roles = [roles]
+
         for role in roles:
             users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
     else:
@@ -92,6 +126,9 @@ async def copy_message(message: Message,
                 reply_markup=markup
             )
         except:
+            user_not_active: User = await User.get(chat_id)
+            if user_not_active:
+                await user_not_active.update_data(is_active=False)
             list_not_success.append(chat_id)
             continue
 
@@ -117,6 +154,9 @@ async def forward_message(message: Message,
 
     users = []
     if roles is not None:
+        if not isinstance(roles, list):
+            roles = [roles]
+
         for role in roles:
             users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
     else:
@@ -132,6 +172,9 @@ async def forward_message(message: Message,
                 message_id=message.message_id,
             )
         except:
+            user_not_active: User = await User.get(chat_id)
+            if user_not_active:
+                await user_not_active.update_data(is_active=False)
             list_not_success.append(chat_id)
             continue
 

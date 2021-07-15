@@ -4,6 +4,7 @@ from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.types import Message, CallbackQuery
 from loguru import logger
 
+from app.data.types.user_data import UserRole
 from app.loader import config
 from app.utils.db_api.models.user import User
 
@@ -17,6 +18,13 @@ class GettingUserFromDataBaseMiddleware(BaseMiddleware):
             data['user'] = None
             data['lang_code'] = config.bot.languages[0]
             return False
+
+        if not user.is_role(UserRole.ADMIN) and user.id == config.bot.admin_id:
+            await user.update_data(role=UserRole.ADMIN)
+
+        if not user.is_active:
+            await user.update_data(is_active=True)
+
 
         if (user.online_at + dt.timedelta(minutes=1)) < dt.datetime.utcnow():
             await user.update_data(online_at=dt.datetime.utcnow())

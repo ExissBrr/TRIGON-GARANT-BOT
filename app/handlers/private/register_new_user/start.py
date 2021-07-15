@@ -38,7 +38,7 @@ async def message_on(message: Message, lang_code):
 
     await message.answer_video(
         video=links.video.window_windows_xp,
-        caption=text[lang_code].default.message.welcome.format(
+        caption=text[lang_code].default.text.welcome.format(
             user_fullname=format_fullname(user.fullname),
             default_lang=format_lang_code(config.bot.languages[0])
         ),

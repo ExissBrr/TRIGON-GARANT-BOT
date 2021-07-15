@@ -12,7 +12,7 @@ async def banned_user(message: Message, lang_code):
 
     if len(args) < 1:
         await message.answer(
-            text=text[lang_code].admin.message.error_command_args
+            text=text[lang_code].admin.text.error_command_args
         )
         return False
     user_data = args.pop(0)
@@ -20,17 +20,17 @@ async def banned_user(message: Message, lang_code):
 
     if not user:
         await message.answer(
-            text=text[lang_code].admin.message.error_search_user_not_found.format(search_data=user_data)
+            text=text[lang_code].admin.text.error_search_user_not_found.format(search_data=user_data)
         )
         return False
 
     if user.id == config.bot.admin_id:
         await message.answer(
-            text=text[lang_code].admin.message.error_blocking_admin,
+            text=text[lang_code].admin.text.error_blocking_admin,
         )
         return False
 
     await user.update_data(is_blocked=True, reason_for_blocking=' '.join(args))
     await message.answer(
-        text=text[lang_code].admin.message.successfull_banned_user
+        text=text[lang_code].admin.text.successfull_banned_user
     )
