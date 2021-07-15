@@ -29,5 +29,4 @@ class MessageForSending(BaseModel):
             title = link_data.split(':')[0]
             link = ''.join(link_data.split(':')[1:])
             links_btn.setdefault(title, link)
-        logger.debug(links_btn)
         return links_btn

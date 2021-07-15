@@ -3,7 +3,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from app.data import text
 
 
-def make_keyboard_cancel(lang_code):
+def keyboard(lang_code):
     keyboard = ReplyKeyboardMarkup(
         resize_keyboard=True,
         keyboard=[

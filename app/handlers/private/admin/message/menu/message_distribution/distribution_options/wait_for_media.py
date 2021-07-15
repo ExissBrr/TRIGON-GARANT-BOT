@@ -1,12 +1,14 @@
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.handler import SkipHandler
 from aiogram.types import Message, ContentType
 
-from app.data import text
 from app.loader import dp
-from app.states.private.message_distribution import MessageSending
+from app.states.private.message_distribution import MessageSendingStates
 
 
-@dp.message_handler(state=MessageSending.wait_for_media, content_types=ContentType.ANY)
+@dp.message_handler(state=MessageSendingStates.wait_for_media, content_types=ContentType.PHOTO)
+@dp.message_handler(state=MessageSendingStates.wait_for_media, content_types=ContentType.VIDEO)
+@dp.message_handler(state=MessageSendingStates.wait_for_media, content_types=ContentType.TEXT)
 async def wait_for_media(message: Message, state: FSMContext, lang_code):
     if message.content_type is ContentType.VIDEO:
         video_id = message.video.file_id
@@ -16,7 +18,6 @@ async def wait_for_media(message: Message, state: FSMContext, lang_code):
         photo_id = message.photo[-1].file_id
         await state.update_data(media_type=ContentType.PHOTO)
         await state.update_data(media_id=photo_id)
-    await message.answer(
-        text=text[lang_code].admin.message.send_time
-    )
-    await MessageSending.wait_for_time.set()
+
+    await MessageSendingStates.request_confirm_create_schedule.set()
+    raise SkipHandler

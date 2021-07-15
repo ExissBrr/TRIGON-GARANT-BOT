@@ -1,13 +1,14 @@
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.handler import SkipHandler
 from aiogram.types import Message
 from loguru import logger
 
 from app.data import text
 from app.loader import dp
-from app.states.private.message_distribution import MessageSending
+from app.states.private.message_distribution import MessageSendingStates
 
 
-@dp.message_handler(state=MessageSending.wait_for_url)
+@dp.message_handler(state=MessageSendingStates.wait_for_url)
 async def wait_for_media(message: Message, state: FSMContext, lang_code):
     raw_data = message.text.split()
     links = {}
@@ -15,13 +16,13 @@ async def wait_for_media(message: Message, state: FSMContext, lang_code):
         try:
             data = data.replace('https://', '').replace('http://', '')
             title, link = data.split(':')
-            logger.debug(f"{title} {link}")
             links.setdefault(title, link)
         except Exception:
-            pass
-    logger.debug(links)
+            await message.answer(
+                text=text[lang_code].default.message.wrong_data
+            )
+            return False
+
     await state.update_data(urls=links)
-    await message.answer(
-        text=text[lang_code].admin.message.send_media
-    )
-    await MessageSending.wait_for_media.set()
+    await MessageSendingStates.request_for_media.set()
+    raise SkipHandler

@@ -6,7 +6,7 @@ from app.keyboards.admin.callback_data.message_distribution import distribution_
 from app.keyboards.default import reply
 from app.keyboards.default.inline import generator_button_url
 from app.loader import dp
-from app.states.private.message_distribution import MessageSending
+from app.states.private.message_distribution import MessageSendingStates
 from app.utils.db_api.models.messages_for_sending import MessageForSending
 
 

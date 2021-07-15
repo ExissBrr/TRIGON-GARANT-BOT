@@ -3,13 +3,14 @@ from aiogram.types import Message, ContentType
 
 from app import keyboards
 from app.data import text
+from app.data.text.ru.default.button.reply import confirm
 from app.loader import dp
-from app.states.private.message_distribution import MessageSending
+from app.states.private.message_distribution import MessageSendingStates
 from app.utils.bot import send_main_keyboard
 from app.utils.db_api.models.messages_for_sending import MessageForSending
 
 
-@dp.message_handler(state=MessageSending.confirm_schedule)
+@dp.message_handler(state=MessageSendingStates.wait_confirm_create_schedule, text=confirm)
 async def add_schedule_in_db(message: Message, state: FSMContext, user, lang_code, state_data: dict):
     distribution_message = state_data.get('mess', None)
     distribution_urls: dict = state_data.get('urls', None)
