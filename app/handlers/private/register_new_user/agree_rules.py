@@ -2,7 +2,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import SkipHandler
 from aiogram.types import Message
 
-from app.data.text.ru.admin.button.reply import agree_rules
+from app.data.text.ru.default.button.reply import agree_rules
 from app.loader import dp
 from app.data import text
 from app.states.private.registration_new_user import RegistrationNewUser

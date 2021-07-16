@@ -1,4 +1,5 @@
 import datetime
+from typing import List
 
 from aiogram.types import ContentType
 from loguru import logger
@@ -16,6 +17,7 @@ class MessageForSending(BaseModel):
     text: str = Column(String(200))
     links_btn: str = Column(String)
     time: str = Column(String(30))
+    chats_id: str = Column(String(100))
 
     def is_content_type(self, content_type: str) -> bool:
         return self.content_type == content_type
@@ -30,3 +32,9 @@ class MessageForSending(BaseModel):
             link = ''.join(link_data.split(':')[1:])
             links_btn.setdefault(title, link)
         return links_btn
+
+    @property
+    def get_chats_id(self) -> List[int]:
+        if not self.chats_id:
+            return []
+        return [int(chat_id) for chat_id in self.chats_id.split()]

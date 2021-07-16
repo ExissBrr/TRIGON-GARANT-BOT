@@ -1,5 +1,3 @@
-agree_rules = 'Я ознакомился и согласен с правилами'
-bot_rules = 'Правила бота'
 message_sending = 'Меню рассылки'
 distribution_settings = 'Управление рассылкой'
 send_messages = 'Рассылка сообщений'

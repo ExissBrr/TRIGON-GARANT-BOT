@@ -10,8 +10,8 @@ from app.states.private.message_distribution import MessageSendingStates
 
 @dp.message_handler(reply_command=send_messages, user_role=UserRole.ADMIN)
 async def wait_for_message(message: Message,lang_code):
+    await MessageSendingStates.wait_for_message.set()
     await message.answer(
         text=text[lang_code].admin.message.send_message,
         reply_markup=reply.cancel.keyboard(lang_code)
     )
-    await MessageSendingStates.wait_for_message.set()

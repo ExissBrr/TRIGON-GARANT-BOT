@@ -11,7 +11,7 @@ from app.loader import dp
 
 @dp.callback_query_handler(NotSubscribedChat())
 @dp.message_handler(NotCommand('start'), NotSubscribedChat(), state='*')
-async def not_subscriber(obj: Union[Message, CallbackQuery], lang_code, links_chat):
+async def user_not_subscriber(obj: Union[Message, CallbackQuery], lang_code, links_chat):
     await obj.bot.send_message(
         chat_id=obj.from_user.id,
         text=text[lang_code].default.message.subscribe_to_the_chat,

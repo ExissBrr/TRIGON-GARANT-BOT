@@ -1,15 +1,14 @@
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.handler import SkipHandler
-from aiogram.types import Message
-from loguru import logger
+from aiogram.types import Message, ContentType
 
 from app.data import text
+from app.handlers.private.admin.message.menu.message_distribution.distribution_options._request_data import \
+    request_for_time, request_for_chat_id
 from app.loader import dp
 from app.states.private.message_distribution import MessageSendingStates
 
-
 @dp.message_handler(state=MessageSendingStates.wait_for_url)
-async def wait_for_media(message: Message, state: FSMContext, lang_code):
+async def wait_for_media(message: Message, state: FSMContext, state_data, lang_code):
     raw_data = message.text.split()
     links = {}
     for data in raw_data:
@@ -24,5 +23,9 @@ async def wait_for_media(message: Message, state: FSMContext, lang_code):
             return False
 
     await state.update_data(urls=links)
-    await MessageSendingStates.request_for_media.set()
-    raise SkipHandler
+
+    await MessageSendingStates.wait_for_chat_id.set()
+
+    # Request chats id
+    await request_for_chat_id(message, lang_code)
+

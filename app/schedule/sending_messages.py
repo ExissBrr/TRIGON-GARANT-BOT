@@ -29,6 +29,7 @@ async def sending_notifications():
             file_id=message.media_id,
             text=message.text,
             markup=generator_button_url.keyboard(message.get_links_btn),
+            chats_id=message.get_chats_id
         )
 
 

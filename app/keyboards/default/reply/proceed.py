@@ -4,17 +4,14 @@ from app.data import text
 
 
 def keyboard(lang_code):
-    keyboard = ReplyKeyboardMarkup(
+    markup = ReplyKeyboardMarkup(
         resize_keyboard=True,
         keyboard=[
             [
                 KeyboardButton(
-                    text=text[lang_code].default.button.reply.confirm
-                ),
-                KeyboardButton(
-                    text=text[lang_code].default.button.reply.cancel
+                    text=text[lang_code].default.button.reply.proceed
                 )
             ]
         ]
     )
-    return keyboard
+    return markup

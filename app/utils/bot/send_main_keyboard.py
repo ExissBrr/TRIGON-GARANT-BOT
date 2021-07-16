@@ -24,9 +24,9 @@ async def send_main_keyboard(user: User, state: FSMContext = None):
 
     bot = Bot.get_current()
 
-    if user.is_role(UserRole.ADMIN):
+    if user and user.is_role(UserRole.ADMIN):
         keyboard = keyboards.admin.reply.main.keyboard(user.lang_code)
-    elif user.is_blocked:
+    elif user and user.is_blocked:
         keyboard = ReplyKeyboardRemove()
     else:
         keyboard = keyboards.default.reply.main.keyboard(user.lang_code)

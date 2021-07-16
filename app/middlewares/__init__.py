@@ -2,6 +2,7 @@ from loguru import logger
 
 from app.loader import dp
 from app.middlewares.antiflood import AntiFloodMiddleware
+from app.middlewares.bun_user import UserBannedMiddleware
 from app.middlewares.getting_bot_data import BotDataMiddleware
 from app.middlewares.getting_state_data import StateDataMiddleware
 from app.middlewares.getting_user_from_db import GettingUserFromDataBaseMiddleware
@@ -11,3 +12,4 @@ dp.setup_middleware(GettingUserFromDataBaseMiddleware())
 dp.setup_middleware(StateDataMiddleware())
 dp.setup_middleware(BotDataMiddleware())
 dp.setup_middleware(AntiFloodMiddleware())
+dp.setup_middleware(UserBannedMiddleware())
