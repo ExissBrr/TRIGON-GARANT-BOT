@@ -39,10 +39,10 @@ class User(BaseModel):
         if isinstance(roles, list):
             return self.role in roles
         return self.role == roles
-
+    @property
     def get_username_history(self) -> list:
         return self.username_history.rstrip().splitlines()
-
+    @property
     def get_full_name_history(self) -> list:
         return self.full_name_history.rstrip().splitlines()
 
