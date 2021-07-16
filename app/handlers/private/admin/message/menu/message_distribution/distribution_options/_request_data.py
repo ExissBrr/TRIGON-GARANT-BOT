@@ -61,7 +61,8 @@ async def request_confirm_create_schedule(message: Message, state_data, lang_cod
             )
     else:
         await message.answer(
-            text=view_text
+            text=view_text,
+            reply_markup=keyboards.default.inline.generator_button_url.keyboard(links=distribution_urls)
         )
     await message.answer(
         text=text[lang_code].admin.message.confirm_create_schedule,

@@ -16,3 +16,8 @@ class MessageSendingStates(StatesGroup):
 
     wait_confirm_create_schedule = State()
 
+    wait_confirm_delete_schedule = State()
+
+    wait_confirm_suspend_schedule = State()
+
+    wait_confirm_activate_schedule = State()

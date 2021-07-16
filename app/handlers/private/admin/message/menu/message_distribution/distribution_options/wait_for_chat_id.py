@@ -1,5 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
+from loguru import logger
 
 from app import keyboards
 from app.loader import dp, config
@@ -24,7 +25,6 @@ async def wait_for_chat_id(message: Message, state: FSMContext, state_data, lang
         keyboard = keyboards.default.reply.proceed_and_chats.keyboard(chats, lang_code)
 
     await state.update_data(chats_id=None or chats_id.strip())
-
     await message.answer(
         text=text[lang_code].default.message.selected_chats.format(
             chats_id='\n'.join(chats_id.split())

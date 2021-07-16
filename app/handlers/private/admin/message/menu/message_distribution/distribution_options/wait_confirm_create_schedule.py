@@ -1,5 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ContentType
+from loguru import logger
 
 from app import keyboards
 from app.data import text

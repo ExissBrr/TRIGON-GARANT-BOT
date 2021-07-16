@@ -7,6 +7,7 @@ from app.handlers.private.admin.message.menu.message_distribution.distribution_o
 from app.loader import dp
 from app.states.private.message_distribution import MessageSendingStates
 
+
 @dp.message_handler(state=MessageSendingStates.wait_for_url)
 async def wait_for_media(message: Message, state: FSMContext, state_data, lang_code):
     raw_data = message.text.split()
@@ -28,4 +29,3 @@ async def wait_for_media(message: Message, state: FSMContext, state_data, lang_c
 
     # Request chats id
     await request_for_chat_id(message, lang_code)
-

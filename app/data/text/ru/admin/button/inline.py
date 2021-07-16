@@ -1,2 +1,5 @@
 btn = 'admin_inline_btn'
 add_schedule = 'Добавить расписание'
+delete = 'Удалить'
+suspend = 'Приостановить'
+activate = 'Активировать'

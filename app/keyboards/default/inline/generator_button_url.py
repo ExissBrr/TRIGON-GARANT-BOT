@@ -8,3 +8,4 @@ def keyboard(links: dict, row_width: int = 2) -> InlineKeyboardMarkup:
         markup.insert(InlineKeyboardButton(text=title, url=link))
 
     return markup
+

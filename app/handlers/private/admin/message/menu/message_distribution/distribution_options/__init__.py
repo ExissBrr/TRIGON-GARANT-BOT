@@ -9,5 +9,8 @@ from .skip_chat_id import dp
 from .proceed_chat_id import dp
 from .wait_for_chat_id import dp
 from .wait_confirm_create_schedule import dp
+from .wait_confirm_delete_schedule import dp
+from .wait_confirm_suspend_schedule import dp
+from .wait_confirm_activate_schedule import dp
 
 __all__ = ['dp']

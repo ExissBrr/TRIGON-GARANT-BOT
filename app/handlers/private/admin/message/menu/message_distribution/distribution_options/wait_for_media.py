@@ -1,10 +1,6 @@
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.handler import SkipHandler
 from aiogram.types import Message, ContentType
 
-from app import keyboards
-from app.data import text
-from app.data.text.ru.default.button.reply import skip
 from app.handlers.private.admin.message.menu.message_distribution.distribution_options._request_data import \
     request_for_url_button
 from app.loader import dp

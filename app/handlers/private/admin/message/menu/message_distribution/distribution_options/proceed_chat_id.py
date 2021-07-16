@@ -1,8 +1,6 @@
-from aiogram.types import Message, ContentType
+from aiogram.types import Message
 
-from app import keyboards
-from app.data import text
-from app.data.text.ru.default.button.reply import skip, proceed
+from app.data.text.ru.default.button.reply import proceed
 from app.handlers.private.admin.message.menu.message_distribution.distribution_options._request_data import \
     request_confirm_create_schedule
 from app.loader import dp
