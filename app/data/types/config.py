@@ -6,6 +6,7 @@ from typing import List
 class BotConfig:
     token: str
     languages: List[str]
+    timezone: int
     admin_id: int
     chats_id: List[int]
     commands: dict

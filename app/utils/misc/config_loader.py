@@ -29,11 +29,13 @@ class ConfigLoader:
     @property
     def _get_bot_config(self) -> BotConfig:
         bot_config = BotConfig(
-            self._config['BotConfig']['token'],
-            self._config['BotConfig']['languages'].split(),
-            int(self._config['BotConfig']['admin_id']),
-            [int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
-            self.get_bot_commands
+            token=self._config['BotConfig']['token'],
+            languages=self._config['BotConfig']['languages'].split(),
+            timezone=int(self._config['BotConfig']['timezone']),
+            admin_id=int(self._config['BotConfig']['admin_id']),
+            chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
+            commands=self.get_bot_commands,
+            is_active=True,
         )
         return bot_config
 

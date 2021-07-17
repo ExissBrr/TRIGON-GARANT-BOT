@@ -1,7 +1,7 @@
 from datetime import datetime as dt
 from typing import List, Union
 
-from sqlalchemy import Column, BigInteger, String, Boolean, DateTime
+from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, Integer
 
 from app.data.types.user_data import UserRole, UserDeepLink, UserPhone, UserDataHistory
 from app.loader import config
@@ -16,6 +16,7 @@ class User(BaseModel):
     fullname: str = Column(String(128))
     lang_code: str = Column(String(10), default=config.bot.languages[0])
     deep_link: int = Column(BigInteger, default=UserDeepLink.NONE)
+    timezone: int = Column(Integer, default=config.bot.timezone)
 
     phone: str = Column(String(24), default=UserPhone.NONE)
 
@@ -39,9 +40,11 @@ class User(BaseModel):
         if isinstance(roles, list):
             return self.role in roles
         return self.role == roles
+
     @property
     def get_username_history(self) -> list:
         return self.username_history.rstrip().splitlines()
+
     @property
     def get_full_name_history(self) -> list:
         return self.full_name_history.rstrip().splitlines()
