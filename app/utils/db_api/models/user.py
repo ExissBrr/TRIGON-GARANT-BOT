@@ -1,4 +1,4 @@
-from datetime import datetime as dt
+import datetime as dt
 from typing import List, Union
 
 from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, Integer
@@ -30,7 +30,7 @@ class User(BaseModel):
     is_active: bool = Column(Boolean, default=True)
     reason_for_blocking: str = Column(String(255))
 
-    online_at: dt = Column(DateTime(), default=dt.utcnow())
+    online_at: dt.datetime = Column(DateTime(), default=dt.datetime.utcnow())
 
     @property
     def url_to_telegram(self) -> str:

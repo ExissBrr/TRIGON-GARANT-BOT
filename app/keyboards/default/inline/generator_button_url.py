@@ -1,5 +1,4 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from loguru import logger
 
 
 def keyboard(links: dict, row_width: int = 2) -> InlineKeyboardMarkup:

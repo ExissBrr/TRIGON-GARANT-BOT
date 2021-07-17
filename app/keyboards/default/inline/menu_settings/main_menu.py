@@ -11,8 +11,14 @@ def keyboard(lang_code) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text=text[lang_code].default.button.inline.menu_settings_lang_code,
-                    callback_data=menu_settings_cd.new(menu=MenuSettingsCD.menu_settings_lang_code)
+                        text=text[lang_code].default.button.inline.menu_setting_lang_code,
+                    callback_data=menu_settings_cd.new(menu=MenuSettingsCD.menu_setting_lang_code)
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text=text[lang_code].default.button.inline.menu_setting_timezone,
+                    callback_data=menu_settings_cd.new(menu=MenuSettingsCD.menu_setting_timezone)
                 )
             ],
             [

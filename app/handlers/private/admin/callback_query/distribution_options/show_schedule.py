@@ -18,22 +18,33 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
         time=message.time
     )
     markup = generator_button_url.keyboard(message.get_links_btn)
-
-    suspend_activate_button = InlineKeyboardButton(
-        text=text[lang_code].admin.button.inline.suspend,
-        callback_data=distribution_cd.new(id=message.id, command=DistributionCommands.SUSPEND_SCHEDULE)
-    )
-    if not message.is_active:
-        suspend_activate_button = InlineKeyboardButton(
-            text=text[lang_code].admin.button.inline.activate,
-            callback_data=distribution_cd.new(id=message.id, command=DistributionCommands.ACTIVATE_SCHEDULE)
+    if message.is_active:
+        markup.row(
+            InlineKeyboardButton(
+                text=text[lang_code].admin.button.inline.suspend,
+                callback_data=distribution_cd.new(
+                    id=message.id,
+                    command=DistributionCommands.UPDATE_ACTIVE_STATUS
+                )
+            )
         )
-
-    markup.add(
-        suspend_activate_button,
+    else:
+        markup.row(
+            InlineKeyboardButton(
+                text=text[lang_code].admin.button.inline.activate,
+                callback_data=distribution_cd.new(
+                    id=message.id,
+                    command=DistributionCommands.UPDATE_ACTIVE_STATUS
+                )
+            )
+        )
+    markup.insert(
         InlineKeyboardButton(
             text=text[lang_code].admin.button.inline.delete,
-            callback_data=distribution_cd.new(id=message.id, command=DistributionCommands.DELETE_SCHEDULE)
+            callback_data=distribution_cd.new(
+                id=message.id,
+                command=DistributionCommands.DELETE_SCHEDULE
+            )
         )
     )
     try:
@@ -46,6 +57,12 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
         elif message.is_content_type(ContentType.VIDEO):
             await call.message.answer_video(
                 video=message.media_id,
+                caption=view_text,
+                reply_markup=markup
+            )
+        elif message.is_content_type(ContentType.ANIMATION):
+            await call.message.answer_animation(
+                animation=message.media_id,
                 caption=view_text,
                 reply_markup=markup
             )

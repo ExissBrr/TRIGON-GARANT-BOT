@@ -8,7 +8,7 @@ def make_keyboard(lang_code):
         resize_keyboard=True,
         keyboard=[
             [
-                KeyboardButton(text[lang_code].default.message.cancel)
+                KeyboardButton(text[lang_code].default.button.reply.cancel)
             ],
             [
                 KeyboardButton(text[lang_code].admin.button.reply.distribution_settings),
