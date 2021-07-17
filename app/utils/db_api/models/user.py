@@ -46,7 +46,7 @@ class User(BaseModel):
         return self.username_history.rstrip().splitlines()
 
     @property
-    def get_full_name_history(self) -> list:
+    def get_fullname_history(self) -> list:
         return self.full_name_history.rstrip().splitlines()
 
     async def update_full_name(self, full_name):

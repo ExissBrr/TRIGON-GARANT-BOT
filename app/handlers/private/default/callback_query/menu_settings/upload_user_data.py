@@ -1,4 +1,5 @@
 from aiogram.types import CallbackQuery
+from sqlalchemy.util import timezone
 
 from app.loader import dp
 from app.data import text
@@ -6,6 +7,7 @@ from app.data.types.menu_cd import MenuSettingsCD
 from app.data.types.tmp_files import ExcelFile
 from app.keyboards.default.callback_data.settings_profile import menu_settings_cd
 from app.utils.db_api.models.user import User
+from app.utils.format_data.time import timezone
 from app.utils.format_data.user import format_username, format_lang_code
 
 
@@ -22,7 +24,7 @@ async def upload_user_data(call: CallbackQuery, user: User, lang_code):
         fullname=user.fullname,
         language=format_lang_code(user.lang_code),
         deep_link=user.deep_link,
-        user_created=user.create_at
+        user_created=timezone(user.create_at, user.timezone).strftime('%Y-%m-%d %M%:%H:%S')
     )
     await call.message.answer_document(
         document=user_data_file.input_file,

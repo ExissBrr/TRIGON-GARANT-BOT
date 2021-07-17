@@ -2,7 +2,6 @@ from typing import List, Union
 
 from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, Message, ContentType
-from loguru import logger
 
 from app.utils.db_api import db
 from app.utils.db_api.models.user import User
@@ -75,6 +74,13 @@ async def text_message(text: str,
             elif content_type == ContentType.VIDEO:
                 await bot.send_video(
                     video=file_id,
+                    chat_id=chat_id,
+                    caption=text,
+                    reply_markup=markup
+                )
+            elif content_type == ContentType.ANIMATION:
+                await bot.send_animation(
+                    animation=file_id,
                     chat_id=chat_id,
                     caption=text,
                     reply_markup=markup

@@ -1,5 +1,7 @@
+from typing import Union
+
 from aiogram.dispatcher import FSMContext
-from aiogram.types import Message, ContentType
+from aiogram.types import Message, ContentType, Video, Animation, PhotoSize
 
 from app.handlers.private.admin.message.menu.message_distribution.distribution_options._request_data import \
     request_for_url_button
@@ -9,15 +11,15 @@ from app.states.private.message_distribution import MessageSendingStates
 
 @dp.message_handler(state=MessageSendingStates.wait_for_media, content_types=ContentType.PHOTO)
 @dp.message_handler(state=MessageSendingStates.wait_for_media, content_types=ContentType.VIDEO)
+@dp.message_handler(state=MessageSendingStates.wait_for_media, content_types=ContentType.ANIMATION)
 async def wait_for_media(message: Message, state: FSMContext, lang_code):
-    if message.content_type is ContentType.VIDEO:
-        video_id = message.video.file_id
-        await state.update_data(media_type=ContentType.VIDEO)
-        await state.update_data(media_id=video_id)
-    elif message.content_type is ContentType.PHOTO:
-        photo_id = message.photo[-1].file_id
-        await state.update_data(media_type=ContentType.PHOTO)
-        await state.update_data(media_id=photo_id)
+    media = message.video or message.animation or message.photo
+    if isinstance(media, Video):
+        await state.update_data(media_type=ContentType.VIDEO, media_id=media.file_id)
+    elif isinstance(media, Animation):
+        await state.update_data(media_type=ContentType.ANIMATION, media_id=media.file_id)
+    elif isinstance(media, PhotoSize):
+        await state.update_data(media_type=ContentType.PHOTO, media_id=media.file_id)
 
     await MessageSendingStates.wait_for_url.set()
 

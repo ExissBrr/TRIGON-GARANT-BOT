@@ -41,29 +41,39 @@ async def request_confirm_create_schedule(message: Message, state_data, lang_cod
     distribution_time = state_data.get('time', '15:00')
     distribution_media = state_data.get('media_id', None)
     distribution_media_type = state_data.get('media_type', ContentType.TEXT)
+
     view_text = text[lang_code].admin.message.message_preview.format(
         text=distribution_message,
         time=distribution_time
     )
-    if distribution_media:
-        if distribution_media_type == ContentType.VIDEO:
-            await message.answer_video(
-                video=distribution_media,
-                caption=view_text,
-                reply_markup=keyboards.default.inline.generator_button_url.keyboard(
-                    links=distribution_urls)
-            )
-        elif distribution_media_type == ContentType.PHOTO:
-            await message.answer_photo(
-                photo=distribution_media,
-                caption=view_text,
-                reply_markup=keyboards.default.inline.generator_button_url.keyboard(links=distribution_urls)
-            )
-    else:
+
+    if distribution_media_type is ContentType.TEXT:
         await message.answer(
             text=view_text,
             reply_markup=keyboards.default.inline.generator_button_url.keyboard(links=distribution_urls)
         )
+
+    elif distribution_media_type == ContentType.VIDEO:
+        await message.answer_video(
+            video=distribution_media,
+            caption=view_text,
+            reply_markup=keyboards.default.inline.generator_button_url.keyboard(
+                links=distribution_urls)
+        )
+    elif distribution_media_type == ContentType.ANIMATION:
+        await message.answer_animation(
+            animation=distribution_media,
+            caption=view_text,
+            reply_markup=keyboards.default.inline.generator_button_url.keyboard(
+                links=distribution_urls)
+        )
+    elif distribution_media_type == ContentType.PHOTO:
+        await message.answer_photo(
+            photo=distribution_media,
+            caption=view_text,
+            reply_markup=keyboards.default.inline.generator_button_url.keyboard(links=distribution_urls)
+        )
+
     await message.answer(
         text=text[lang_code].admin.message.confirm_create_schedule,
         reply_markup=keyboards.default.reply.confirm_cancel.keyboard(lang_code)
