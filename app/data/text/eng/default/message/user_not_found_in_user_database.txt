@@ -1,2 +1,0 @@
-Oops, I didn't find you in my database.
-Prescribe /start

@@ -1,6 +1,6 @@
 [BotConfig]
 token=Your token bot
-languages=ru eng
+languages=ru
 timezone=3
 admin_id=0
 chats_id=

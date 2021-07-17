@@ -1,3 +1,0 @@
-⚠️ User is not found ⚠️
-
-Search data: {search_data}

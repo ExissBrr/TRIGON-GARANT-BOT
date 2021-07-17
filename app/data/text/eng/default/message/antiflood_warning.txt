@@ -1,4 +1,0 @@
-⚠️ Attention ⚠️
-
-We have an anti-flood system.
-Please do not send many requests, otherwise the bot will temporarily block you.
