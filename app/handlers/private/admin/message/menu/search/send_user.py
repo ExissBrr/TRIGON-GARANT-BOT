@@ -7,12 +7,12 @@ from app.data.text.ru.admin.button.reply import search
 from app.data.types.tmp_files import ExcelFile
 from app.data.types.user_data import UserRole
 from app.loader import dp
-from app.states.private.find_user import FindUser
+from app.states.private.search import SearchStates
 from app.utils.db_api.models.user import User
 from app.utils.format_data.user import format_username, format_fullname
 
 
-@dp.message_handler(state=FindUser.wait_for_data)
+@dp.message_handler(state=SearchStates.wait_for_data)
 async def send_user_info(message: Message, lang_code):
     user = await User.query.where(User.qf(username=message.text, op='or', id=message.text)).gino.first()
     if not user:
