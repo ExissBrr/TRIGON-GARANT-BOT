@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from app.data import text
-from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.callback_data.message_distribution import distribution_cd, DistributionCommands
 
 
 def make_keyboard(lang_code, messages):

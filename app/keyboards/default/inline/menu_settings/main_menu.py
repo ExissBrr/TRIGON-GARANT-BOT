@@ -2,8 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from app.data import text
 from app.data.types.menu_cd import MenuSettingsCD
-from app.keyboards.default.callback_data.settings_profile import menu_settings_cd
-from app.utils.db_api.models.user import User
+from app.keyboards.callback_data import menu_settings_cd
 
 
 def keyboard(lang_code) -> InlineKeyboardMarkup:

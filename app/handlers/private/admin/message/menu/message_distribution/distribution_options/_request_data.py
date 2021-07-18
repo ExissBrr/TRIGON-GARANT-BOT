@@ -1,4 +1,3 @@
-from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ContentType
 
 from app import keyboards
@@ -31,7 +30,7 @@ async def request_for_url_button(message: Message, lang_code):
 async def request_for_time(message: Message, lang_code):
     await message.answer(
         text=text[lang_code].default.message.send_time,
-        reply_markup=keyboards.admin.reply.hours_and_minutes_list.keyboard(lang_code)
+        reply_markup=app.keyboards.default.reply.hours_and_minutes_list.keyboard(lang_code)
     )
 
 

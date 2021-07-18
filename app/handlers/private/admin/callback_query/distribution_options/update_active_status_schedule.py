@@ -1,7 +1,7 @@
 from aiogram.types import CallbackQuery, InlineKeyboardButton
 
 from app.data import text
-from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.callback_data.message_distribution import distribution_cd, DistributionCommands
 from app.keyboards.default.inline import generator_button_url
 from app.loader import dp
 from app.utils.db_api.models.messages_for_sending import MessageForSending

@@ -2,7 +2,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
 from app.data import text
-from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.callback_data.message_distribution import distribution_cd, DistributionCommands
 from app.keyboards.default import reply
 from app.loader import dp
 from app.states.private.message_distribution import MessageSendingStates

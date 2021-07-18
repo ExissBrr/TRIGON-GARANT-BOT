@@ -1,9 +1,8 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, ContentType, InlineKeyboardButton
 
-from app import keyboards
 from app.data import text
-from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.callback_data.message_distribution import distribution_cd, DistributionCommands
 from app.keyboards.default.inline import generator_button_url
 from app.loader import dp
 from app.utils.db_api.models.messages_for_sending import MessageForSending
@@ -23,7 +22,7 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
         messages_in_schedule = await MessageForSending.query.gino.all()
 
         await call.message.edit_reply_markup(
-            reply_markup=keyboards.admin.inline.menu_distribution_control.make_keyboard(lang_code, messages_in_schedule)
+            reply_markup=app.keyboards.default.inline.menu_distribution_control.make_keyboard(lang_code, messages_in_schedule)
         )
         return False
 

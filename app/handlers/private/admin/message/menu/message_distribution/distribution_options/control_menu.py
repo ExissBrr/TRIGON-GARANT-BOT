@@ -1,7 +1,5 @@
-from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 
-from app import keyboards
 from app.data import text
 from app.data.text.ru.button.reply import distribution_settings
 from app.data.types.user_data import UserRole
@@ -16,5 +14,5 @@ async def show_menu(message: Message, user, lang_code):
     messages_in_schedule = await MessageForSending.query.gino.all()
     await message.answer(
         text=text[lang_code].default.message.choose_action,
-        reply_markup=keyboards.admin.inline.menu_distribution_control.make_keyboard(lang_code, messages_in_schedule)
+        reply_markup=app.keyboards.default.inline.menu_distribution_control.make_keyboard(lang_code, messages_in_schedule)
     )

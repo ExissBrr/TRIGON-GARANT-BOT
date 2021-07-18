@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from app.keyboards.default.callback_data.settings_profile import choice_lang_cd
+from app.keyboards.callback_data import choice_lang_cd
 from app.loader import config
 from app.utils.db_api.models.user import User
 from app.utils.format_data.user import format_lang_code

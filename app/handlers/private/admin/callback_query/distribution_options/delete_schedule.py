@@ -3,7 +3,7 @@ from aiogram.types import CallbackQuery
 
 from app import keyboards
 from app.data import text
-from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.callback_data.message_distribution import distribution_cd, DistributionCommands
 from app.loader import dp
 from app.states.private.message_distribution import MessageSendingStates
 from app.utils.db_api.models.messages_for_sending import MessageForSending

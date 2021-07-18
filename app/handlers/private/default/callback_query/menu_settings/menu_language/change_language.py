@@ -2,7 +2,7 @@ from aiogram.types import CallbackQuery
 
 from app import keyboards
 from app.data import text
-from app.keyboards.default.callback_data.settings_profile import choice_lang_cd
+from app.keyboards.callback_data import choice_lang_cd
 from app.loader import dp
 from app.utils.bot import send_main_keyboard
 from app.utils.format_data.user import format_lang_code
