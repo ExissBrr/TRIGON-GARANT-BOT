@@ -2,7 +2,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, ContentType, InlineKeyboardButton
 
 from app.data import text
-from app.keyboards.admin.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
 from app.keyboards.default.inline import generator_button_url
 from app.loader import dp
 from app.utils.db_api.models.messages_for_sending import MessageForSending
@@ -13,7 +13,15 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
     await call.answer(cache_time=5, text='One moment..')
     distribution_message_id = callback_data.get('id')
     message: MessageForSending = await MessageForSending.get(int(distribution_message_id))
-    view_text = text[lang_code].admin.message.message_preview.format(
+
+    if not message:
+        await call.answer(
+            cache_time=200,
+            text=text[lang_code].default.call.message_deleted
+        )
+        return False
+
+    view_text = text[lang_code].default.message.message_preview.format(
         text=message.text,
         time=message.time
     )
@@ -21,7 +29,7 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
     if message.is_active:
         markup.row(
             InlineKeyboardButton(
-                text=text[lang_code].admin.button.inline.suspend,
+                text=text[lang_code].button.inline.suspend,
                 callback_data=distribution_cd.new(
                     id=message.id,
                     command=DistributionCommands.UPDATE_ACTIVE_STATUS
@@ -31,7 +39,7 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
     else:
         markup.row(
             InlineKeyboardButton(
-                text=text[lang_code].admin.button.inline.activate,
+                text=text[lang_code].button.inline.activate,
                 callback_data=distribution_cd.new(
                     id=message.id,
                     command=DistributionCommands.UPDATE_ACTIVE_STATUS
@@ -40,7 +48,7 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
         )
     markup.insert(
         InlineKeyboardButton(
-            text=text[lang_code].admin.button.inline.delete,
+            text=text[lang_code].button.inline.delete,
             callback_data=distribution_cd.new(
                 id=message.id,
                 command=DistributionCommands.DELETE_SCHEDULE
@@ -73,5 +81,5 @@ async def add_schedule(call: CallbackQuery, state: FSMContext, callback_data: di
             )
     except Exception as ex:
         await call.message.answer(
-            text=text[lang_code].admin.message.error_show_message.format(error=ex)
+            text=text[lang_code].default.message.error_show_message.format(error=ex)
         )

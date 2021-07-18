@@ -1,3 +1,7 @@
+message_sending = 'Меню рассылки'
+distribution_settings = 'Управление рассылкой'
+send_messages = 'Рассылка сообщений'
+search = 'Поиск'
 agree_rules = 'Я ознакомился и согласен с правилами'
 checking = 'Проверить'
 profile = 'Мой профиль'

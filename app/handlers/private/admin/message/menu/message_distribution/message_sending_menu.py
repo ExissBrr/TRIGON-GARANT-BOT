@@ -1,7 +1,7 @@
 from aiogram.types import Message
 
 from app.data import text
-from app.data.text.ru.admin.button.reply import message_sending
+from app.data.text.ru.button.reply import message_sending
 from app.data.types.user_data import UserRole
 from app.keyboards.admin import reply
 from app.loader import dp

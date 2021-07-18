@@ -4,7 +4,7 @@ from loguru import logger
 
 from app import keyboards
 from app.data import text
-from app.data.text.ru.default.button.reply import confirm
+from app.data.text.ru.button.reply import confirm
 from app.loader import dp
 from app.states.private.message_distribution import MessageSendingStates
 from app.utils.bot import send_main_keyboard

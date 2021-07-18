@@ -41,7 +41,7 @@ async def send_user_info(message: Message, user, lang_code):
     )
     await message.answer_document(
         document=user_file_data.input_file,
-        caption=text[lang_code].admin.message.user_info.format(
+        caption=text[lang_code].default.message.user_info.format(
             user_id=user_for_search.id,
             user_fullname=format_fullname(user_for_search.fullname),
             user_username=format_username(user_for_search.username),

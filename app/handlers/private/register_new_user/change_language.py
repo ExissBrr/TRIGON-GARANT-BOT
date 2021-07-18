@@ -26,7 +26,7 @@ async def message_on(message: Message, user, lang_code):
     )
 
     links_data = {
-        text[lang_code].default.button.inline.bot_rules: links.telegraph.bot_rules,
+        text[lang_code].button.inline.bot_rules: links.telegraph.bot_rules,
     }
 
     await message.answer(
