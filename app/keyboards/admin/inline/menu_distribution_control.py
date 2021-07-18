@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from app.data import text
-from app.keyboards.admin.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
 
 
 def make_keyboard(lang_code, messages):
@@ -9,7 +9,7 @@ def make_keyboard(lang_code, messages):
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text=text[lang_code].admin.button.inline.add_schedule,
+                    text=text[lang_code].button.inline.add_schedule,
                     callback_data=distribution_cd.new(id=0, command=DistributionCommands.ADD_SCHEDULE)
                 )
             ]

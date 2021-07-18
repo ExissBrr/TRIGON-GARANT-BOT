@@ -16,21 +16,21 @@ async def request_for_chat_id(message: Message, lang_code):
 
 async def request_for_media(message: Message, lang_code):
     await message.answer(
-        text=text[lang_code].admin.message.send_media,
+        text=text[lang_code].default.message.send_media,
         reply_markup=keyboards.default.reply.skip.keyboard(lang_code),
     )
 
 
 async def request_for_url_button(message: Message, lang_code):
     await message.answer(
-        text=text[lang_code].admin.message.send_btn_link,
+        text=text[lang_code].default.message.send_btn_link,
         reply_markup=keyboards.default.reply.skip.keyboard(lang_code)
     )
 
 
 async def request_for_time(message: Message, lang_code):
     await message.answer(
-        text=text[lang_code].admin.message.send_time,
+        text=text[lang_code].default.message.send_time,
         reply_markup=keyboards.admin.reply.hours_and_minutes_list.keyboard(lang_code)
     )
 
@@ -42,7 +42,7 @@ async def request_confirm_create_schedule(message: Message, state_data, lang_cod
     distribution_media = state_data.get('media_id', None)
     distribution_media_type = state_data.get('media_type', ContentType.TEXT)
 
-    view_text = text[lang_code].admin.message.message_preview.format(
+    view_text = text[lang_code].default.message.message_preview.format(
         text=distribution_message,
         time=distribution_time
     )
@@ -75,6 +75,6 @@ async def request_confirm_create_schedule(message: Message, state_data, lang_cod
         )
 
     await message.answer(
-        text=text[lang_code].admin.message.confirm_create_schedule,
+        text=text[lang_code].default.message.confirm_create_schedule,
         reply_markup=keyboards.default.reply.confirm_cancel.keyboard(lang_code)
     )

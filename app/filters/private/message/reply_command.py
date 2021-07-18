@@ -14,15 +14,8 @@ class ReplyCommand(BoundFilter):
 
     async def check(self, message: Message) -> bool:
         for lang in self.langs:
-
-            for key, value in text[lang].admin.button.reply.__dict__.items():
+            for key, value in text[lang].button.reply.__dict__.items():
                 if value == self.reply_button_text:
                     for lang in self.langs:
-                        if text[lang].admin.button.reply.__dict__.get(key) == message.text:
-                            return True
-
-            for key, value in text[lang].default.button.reply.__dict__.items():
-                if value == self.reply_button_text:
-                    for lang in self.langs:
-                        if text[lang].default.button.reply.__dict__.get(key) == message.text:
+                        if text[lang].button.reply.__dict__.get(key) == message.text:
                             return True

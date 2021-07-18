@@ -9,10 +9,10 @@ def keyboard(lang_code):
         keyboard=[
             [
                 KeyboardButton(
-                    text=text[lang_code].default.button.reply.confirm
+                    text=text[lang_code].button.reply.confirm
                 ),
                 KeyboardButton(
-                    text=text[lang_code].default.button.reply.cancel
+                    text=text[lang_code].button.reply.cancel
                 )
             ]
         ]

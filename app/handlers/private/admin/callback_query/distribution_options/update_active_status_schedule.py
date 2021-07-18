@@ -1,7 +1,7 @@
 from aiogram.types import CallbackQuery, InlineKeyboardButton
 
 from app.data import text
-from app.keyboards.admin.callback_data.message_distribution import distribution_cd, DistributionCommands
+from app.keyboards.default.callback_data.message_distribution import distribution_cd, DistributionCommands
 from app.keyboards.default.inline import generator_button_url
 from app.loader import dp
 from app.utils.db_api.models.messages_for_sending import MessageForSending
@@ -25,7 +25,7 @@ async def delete_schedule(call: CallbackQuery, callback_data: dict, lang_code):
     if not schedule_message.is_active:
         markup.row(
             InlineKeyboardButton(
-                text=text[lang_code].admin.button.inline.suspend,
+                text=text[lang_code].button.inline.suspend,
                 callback_data=distribution_cd.new(
                     id=schedule_message.id,
                     command=DistributionCommands.UPDATE_ACTIVE_STATUS
@@ -35,7 +35,7 @@ async def delete_schedule(call: CallbackQuery, callback_data: dict, lang_code):
     else:
         markup.row(
             InlineKeyboardButton(
-                text=text[lang_code].admin.button.inline.activate,
+                text=text[lang_code].button.inline.activate,
                 callback_data=distribution_cd.new(
                     id=schedule_message.id,
                     command=DistributionCommands.UPDATE_ACTIVE_STATUS
@@ -45,7 +45,7 @@ async def delete_schedule(call: CallbackQuery, callback_data: dict, lang_code):
 
     markup.insert(
         InlineKeyboardButton(
-            text=text[lang_code].admin.button.inline.delete,
+            text=text[lang_code].button.inline.delete,
             callback_data=distribution_cd.new(
                 id=schedule_message.id,
                 command=DistributionCommands.DELETE_SCHEDULE

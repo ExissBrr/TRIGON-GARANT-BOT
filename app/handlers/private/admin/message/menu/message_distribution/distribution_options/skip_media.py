@@ -1,6 +1,6 @@
 from aiogram.types import Message
 
-from app.data.text.ru.default.button.reply import skip
+from app.data.text.ru.button.reply import skip
 from app.handlers.private.admin.message.menu.message_distribution.distribution_options._request_data import \
     request_for_url_button
 from app.loader import dp
