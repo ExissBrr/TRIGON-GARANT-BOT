@@ -1,0 +1,6 @@
+Информация о пользователе
+
+<b>ID:</b> {user_id}
+<b>Имя:</b> {user_fullname}
+<b>Username:</b> {user_username}
+<a href="{user_url_to_telegram}"><b>Ссылка на пользователя</b></a>

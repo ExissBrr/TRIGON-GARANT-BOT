@@ -7,3 +7,4 @@ from . import skip
 from . import proceed
 from . import skip_and_chats
 from . import proceed_and_chats
+from . import menu_message_distribution

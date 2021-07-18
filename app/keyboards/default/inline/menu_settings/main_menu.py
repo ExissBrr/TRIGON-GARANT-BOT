@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from app.data import text
 from app.data.types.menu_cd import MenuSettingsCD
-from app.keyboards.callback_data import menu_settings_cd
+from app.keyboards.callback_data.settings_profile import menu_settings_cd
 
 
 def keyboard(lang_code) -> InlineKeyboardMarkup:
@@ -10,7 +10,7 @@ def keyboard(lang_code) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                        text=text[lang_code].default.button.inline.menu_setting_lang_code,
+                    text=text[lang_code].default.button.inline.menu_setting_lang_code,
                     callback_data=menu_settings_cd.new(menu=MenuSettingsCD.menu_setting_lang_code)
                 )
             ],

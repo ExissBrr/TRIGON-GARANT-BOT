@@ -1,0 +1,14 @@
+Welcome <b>{user_fullname}</b>!
+Please select a language that suits you best to continue.
+interact with the bot.
+
+<b>You can change the language using the /settings command.</b>
+The default language will be {default_lang}.
+
+
+Добро пожаловать, <b>{user_fullname}</b>!
+Для продолжения выберите язык, на котором вам буде удобнее
+взаимодействовать с ботом.
+
+<b>Сменить язык вы сможете, используя команду /settings.</b>
+По умолчанию установится {default_lang} язык.

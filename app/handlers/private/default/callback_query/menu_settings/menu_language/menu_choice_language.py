@@ -1,10 +1,10 @@
 from aiogram.types import CallbackQuery
 
 from app import keyboards
+from app.keyboards.callback_data.settings_profile import menu_settings_cd
 from app.loader import dp
 from app.data import text
 from app.data.types.menu_cd import MenuSettingsCD
-from app.keyboards.callback_data import menu_settings_cd
 
 
 @dp.callback_query_handler(menu_settings_cd.filter(menu=MenuSettingsCD.menu_setting_lang_code))
