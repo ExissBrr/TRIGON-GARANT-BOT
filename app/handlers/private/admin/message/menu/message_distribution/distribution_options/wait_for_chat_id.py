@@ -10,7 +10,7 @@ from app.states.private.message_distribution import MessageSendingStates
 
 @dp.message_handler(state=MessageSendingStates.wait_for_chat_id)
 async def wait_for_chat_id(message: Message, state: FSMContext, state_data, lang_code):
-    chats_id: str = state_data.get('chats_id', '')
+    chats_id: str = state_data.get('main_chats_id', '')
     chat_id = message.text.split()[0]
 
     if chats_id.find(chat_id) != -1:

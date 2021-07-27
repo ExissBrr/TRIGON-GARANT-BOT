@@ -8,6 +8,7 @@ class BotConfig:
     languages: List[str]
     timezone: int
     admin_id: int
+    main_chats_id: List[int]
     chats_id: List[int]
     commands: dict
     is_active: bool = True

@@ -17,13 +17,14 @@ class User(BaseModel):
     lang_code: str = Column(String(10), default=config.bot.languages[0])
     deep_link: int = Column(BigInteger, default=UserDeepLink.NONE)
     timezone: int = Column(Integer, default=config.bot.timezone)
+    prefix: str = Column(String(60))
 
     phone: str = Column(String(24), default=UserPhone.NONE)
 
     role: str = Column(String(20), default=UserRole.DEFAULT)
 
     username_history: str = Column(String, default=UserDataHistory.NONE)
-    full_name_history: str = Column(String, default=UserDataHistory.NONE)
+    fullname_history: str = Column(String, default=UserDataHistory.NONE)
 
     is_read_rules: bool = Column(Boolean, default=False)
     is_blocked: bool = Column(Boolean, default=False)
@@ -40,21 +41,19 @@ class User(BaseModel):
         if isinstance(roles, list):
             return self.role in roles
         return self.role == roles
-
     @property
     def get_username_history(self) -> list:
         return self.username_history.rstrip().splitlines()
-
     @property
     def get_fullname_history(self) -> list:
-        return self.full_name_history.rstrip().splitlines()
+        return self.fullname_history.rstrip().splitlines()
 
-    async def update_full_name(self, full_name):
-        if self.fullname == full_name:
+    async def update_fullname(self, fullname):
+        if self.fullname == fullname:
             return False
-        self.full_name_history += full_name + '\n'
-        await self.update_data(full_name_history=self.full_name_history)
-        await self.update_data(full_name=full_name)
+        self.fullname_history += fullname + '\n'
+        await self.update_data(fullname_history=self.fullname_history)
+        await self.update_data(fullname=fullname)
 
     async def update_username(self, username):
         if self.username == username:

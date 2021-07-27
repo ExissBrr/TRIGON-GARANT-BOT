@@ -10,7 +10,7 @@ class NotSubscribedChat(BoundFilter):
 
     async def check(self, obj: Union[Message, CallbackQuery]) -> Union[bool, dict[str, dict[str, str]]]:
 
-        # If not chats_id
+        # If not main_chats_id
         if not config.bot.chats_id:
             return False
 

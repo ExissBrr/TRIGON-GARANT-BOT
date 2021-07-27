@@ -30,7 +30,7 @@ class GettingUserFromDataBaseMiddleware(BaseMiddleware):
             await user.update_data(online_at=dt.datetime.utcnow())
 
         await user.update_username(message.from_user.username)
-        await user.update_full_name(message.from_user.full_name)
+        await user.update_fullname(message.from_user.full_name)
 
         data['user'] = user
         data['lang_code'] = user.lang_code
@@ -47,7 +47,7 @@ class GettingUserFromDataBaseMiddleware(BaseMiddleware):
             await user.update_data(online_at=dt.datetime.utcnow())
 
         await user.update_username(call.from_user.username)
-        await user.update_full_name(call.from_user.full_name)
+        await user.update_fullname(call.from_user.full_name)
 
         data['user'] = user
         data['lang_code'] = user.lang_code

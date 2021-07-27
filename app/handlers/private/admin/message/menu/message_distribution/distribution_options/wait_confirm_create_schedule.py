@@ -19,7 +19,7 @@ async def add_schedule_in_db(message: Message, state: FSMContext, user, lang_cod
     distribution_media = state_data.get('media_id', None)
     distribution_media_type = state_data.get('media_type', ContentType.TEXT)
     distribution_time = state_data.get('time', '15:00')
-    distribution_chats_id = state_data.get('chats_id', None)
+    distribution_chats_id = state_data.get('main_chats_id', None)
     links = ''
     for title, link in distribution_urls.items():
         links += f"{title}:{link} "

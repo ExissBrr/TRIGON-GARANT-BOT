@@ -8,7 +8,7 @@ from app.schedule.update_users_data import update_users_data
 
 
 async def on_startup_schedule():
-    aioschedule.every().minute.do(sending_notifications)
+    aioschedule.every(40).seconds.do(sending_notifications)
     aioschedule.every().day.at('00:00').do(sending_user_statistics)
     aioschedule.every().day.at('00:00').do(sending_start_link_history_statistics)
     aioschedule.every().day.at('6:00').do(update_users_data)

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class MiscLinks:
-    github: str
+    pass
 
 
 @dataclass
@@ -25,6 +25,7 @@ class DocumentLinks:
 @dataclass
 class TelegraphLinks:
     bot_rules: str
+    bot_instructions: str
 
 
 @dataclass

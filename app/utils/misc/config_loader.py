@@ -1,14 +1,11 @@
 import configparser
 
-from loguru import logger
-
 from app.data.types.config import BotConfig, Config, DatabaseConfig
 
 
 class ConfigLoader:
 
     def __init__(self, path_to_config: str):
-        logger.info(f'Config: Read Config')
         self._path_to_config = path_to_config
         self._config = configparser.ConfigParser()
 
@@ -17,8 +14,8 @@ class ConfigLoader:
     @property
     def get_config(self) -> Config:
         config = Config(
-            self._get_bot_config,
-            self._get_database_config
+            bot=self._get_bot_config,
+            database=self._get_database_config
         )
         return config
 
@@ -31,11 +28,10 @@ class ConfigLoader:
         bot_config = BotConfig(
             token=self._config['BotConfig']['token'],
             languages=self._config['BotConfig']['languages'].split(),
-            timezone=int(self._config['BotConfig']['timezone']),
             admin_id=int(self._config['BotConfig']['admin_id']),
             chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
-            commands=self.get_bot_commands,
-            is_active=True,
+            main_chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['main_chats_id'].split()],
+            commands=self.get_bot_commands
         )
         return bot_config
 
@@ -47,11 +43,11 @@ class ConfigLoader:
         db_user = self._config['DatabaseConfig']['db_user']
         db_pass = self._config['DatabaseConfig']['db_pass']
         database_config = DatabaseConfig(
-            host,
-            port,
-            db,
-            db_user,
-            db_pass,
-            f'postgresql://{db_user}:{db_pass}@{host}:{port}/{db}',
+            host=host,
+            port=port,
+            db=db,
+            db_user=db_user,
+            db_pass=db_pass,
+            url=f'postgresql://{db_user}:{db_pass}@{host}:{port}/{db}',
         )
         return database_config

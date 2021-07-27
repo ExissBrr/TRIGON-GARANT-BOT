@@ -21,11 +21,11 @@ async def update_users_data():
         user_telegram = await bot.get_chat(user_database.id)
 
         if user_telegram.full_name != user_database.fullname:
-            await user_database.update_data(fullname=user_telegram.full_name)
+            await user_database.update_fullname(fullname=user_telegram.full_name)
             count_updates += 1
 
         if user_telegram.username != user_database.username:
-            await user_database.update_data(username=user_telegram.username)
+            await user_database.update_username(username=user_telegram.username)
             count_updates += 1
 
     if count_updates:

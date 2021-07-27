@@ -2,6 +2,7 @@ from typing import List, Union
 
 from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, Message, ContentType
+from loguru import logger
 
 from app.utils.db_api import db
 from app.utils.db_api.models.user import User
@@ -23,7 +24,6 @@ async def text_message(text: str,
         chats_id (Union[int, List[int]]): Chats id
         markup (InlineKeyboardMarkup): Inline keyboard markup (url)
         **where_conditions ():
-
     Returns:
         Conditions for database queries.
     """
@@ -44,8 +44,6 @@ async def text_message(text: str,
 
         for role in roles:
             users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
-    else:
-        users.extend(await db.all(User.query.where(User.qf(**where_conditions))))
 
     chats_id.extend([user.id for user in users])
 
@@ -86,6 +84,7 @@ async def text_message(text: str,
                     reply_markup=markup
                 )
         except Exception as ex:
+            logger.error(ex)
             user_not_active: User = await User.get(chat_id)
             if user_not_active:
                 await user_not_active.update_data(is_active=False)
@@ -118,8 +117,6 @@ async def copy_message(message: Message,
 
         for role in roles:
             users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
-    else:
-        users.extend(await db.all(User.query.where(User.qf(**where_conditions))))
 
     chats_id.extend([user.id for user in users])
 
@@ -165,8 +162,6 @@ async def forward_message(message: Message,
 
         for role in roles:
             users.extend(await db.all(User.query.where(User.qf(role=role, **where_conditions))))
-    else:
-        users.extend(await db.all(User.query.where(User.qf(**where_conditions))))
 
     chats_id.extend([user.id for user in users])
 

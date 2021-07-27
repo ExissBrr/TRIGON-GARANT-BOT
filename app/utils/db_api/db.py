@@ -15,8 +15,8 @@ class BaseModel(db.Model):
     __tablename__: str
     query: Query
 
-    create_at: datetime.datetime = Column(DateTime, server_default=db.func.now())
-    update_at: datetime.datetime = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
+    create_at: datetime.datetime = Column(DateTime, default=datetime.datetime.utcnow())
+    update_at: datetime.datetime = Column(DateTime, default=datetime.datetime.utcnow(), server_onupdate=db.func.now())
 
     async def update_data(self, **kwargs):
         """

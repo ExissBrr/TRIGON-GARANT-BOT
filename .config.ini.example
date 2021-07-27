@@ -3,12 +3,13 @@ token=Your token bot
 languages=ru
 timezone=3
 admin_id=0
+main_chats_id=
 chats_id=
 
 [BotCommands]
-start=main menu
-help=help menu
-settings=settings menu
+start=Main menu
+help=Help menu
+settings=Settings menu
 
 [DatabaseConfig]
 host=localhost
