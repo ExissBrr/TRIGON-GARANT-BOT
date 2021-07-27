@@ -15,7 +15,7 @@ async def send_menu_profile(message: Message, user: User, bot_data, lang_code):
         user_id=user.id,
         user_username=format_username(user.username),
         datetime_register=timezone(user.create_at, user.timezone).strftime('%Y-%m-%d %H:%M'),
-        start_link_easter_egg=make_start_link(bot_data.username, 'easter_egg'),
+        start_link_easter_egg=make_start_link(bot_data.username, 'easter_egg_profile'),
     )
     photos = (await message.from_user.get_profile_photos()).photos
     if photos:

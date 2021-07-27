@@ -1,4 +1,0 @@
-<b>Личный кабине<a href="{start_link_easter_egg}">т</a></b>
-Дата регистрации: {datetime_register}
-ID: {user_id}
-Username: {user_username}

@@ -3,7 +3,7 @@ version: "3.1"
 services:
   db:
     container_name: postgres_template
-    image: sameersbn/postgresql:10-2
+    image: sameersbn/postgresql:12-2
     environment:
       PG_PASSWORD: $db_pass
     restart: always
@@ -28,7 +28,7 @@ services:
     env_file:
       - ".config.ini"
     depends_on:
-      - db_template
+      - postgres_template
     volumes:
       - .:/src
 

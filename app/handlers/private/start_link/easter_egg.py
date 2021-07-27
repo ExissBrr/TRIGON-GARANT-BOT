@@ -8,7 +8,7 @@ from app.loader import dp
 from app.utils.db_api.models.start_link import StartLinkHistory
 
 
-@dp.message_handler(StartLink('easter_egg'))
+@dp.message_handler(StartLink('easter_egg_profile'))
 async def send_easter_egg(message: Message, user, message_args: dict):
     await StartLinkHistory.insert(
         type=StartLinkType.USED,

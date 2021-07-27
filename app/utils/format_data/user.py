@@ -1,7 +1,10 @@
+from typing import Union
+
 from app.data.types.lang import LangCode
+from app.utils.db_api.models.user import User
 
 
-def format_username(username: str) -> str:
+def format_username(username: Union[str, User], default: str = 'Not username') -> str:
     """
     Formatting username to string.
     Args:
@@ -10,16 +13,18 @@ def format_username(username: str) -> str:
     Returns:
         Formatted username.
     """
+    if isinstance(username, User):
+        username = username.username
 
     if str(username) == 'None':
-        username = 'Not username'
+        username = default
     else:
         username = '@' + username
 
     return username
 
 
-def format_fullname(fullname: str) -> str:
+def format_fullname(fullname: Union[str, User]) -> str:
     """
     Formatting user fullname.
     Replace html symbol to html code.
@@ -30,16 +35,14 @@ def format_fullname(fullname: str) -> str:
         Formatted user fullname.
 
     """
-    new_fullname = ''
-    for char in fullname:
-        if char == '<':
-            new_fullname += '&lt;'
-        elif char == '>':
-            new_fullname += '&gt;'
-        else:
-            new_fullname += char
+    if isinstance(fullname, User):
+        fullname = fullname.fullname
 
-    return new_fullname
+    fullname = fullname.replace('<', '&lt;')
+    fullname = fullname.replace('>', '&gt;')
+    fullname = fullname.replace(' ', '👻')
+
+    return fullname
 
 
 def format_lang_code(lang_code: str) -> str:

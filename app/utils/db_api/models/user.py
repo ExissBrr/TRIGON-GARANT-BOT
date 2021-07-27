@@ -37,28 +37,34 @@ class User(BaseModel):
     def url_to_telegram(self) -> str:
         return f"tg://user?id={self.id}"
 
+
+    @property
+    def get_username_history(self) -> list:
+        return self.username_history.rstrip().split()
+
+    @property
+    def get_fullname_history(self) -> list:
+        return self.fullname_history.rstrip().split()
+
     def is_role(self, roles: Union[str, List[str]]) -> bool:
         if isinstance(roles, list):
             return self.role in roles
         return self.role == roles
-    @property
-    def get_username_history(self) -> list:
-        return self.username_history.rstrip().splitlines()
-    @property
-    def get_fullname_history(self) -> list:
-        return self.fullname_history.rstrip().splitlines()
 
     async def update_fullname(self, fullname):
         if self.fullname == fullname:
             return False
-        self.fullname_history += fullname + '\n'
-        await self.update_data(fullname_history=self.fullname_history)
+
+        new_history = self.fullname_history + fullname + ' '
+
+        await self.update_data(fullname_history=new_history)
         await self.update_data(fullname=fullname)
 
     async def update_username(self, username):
         if self.username == username:
             return False
 
-        self.username_history += str(self.username) + '\n'
-        await self.update_data(username_history=self.username_history)
+        new_history = self.username_history + str(self.username) + ' '
+
+        await self.update_data(username_history=new_history)
         await self.update_data(username=username)

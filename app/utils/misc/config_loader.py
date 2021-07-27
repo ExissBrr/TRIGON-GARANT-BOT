@@ -28,6 +28,7 @@ class ConfigLoader:
         bot_config = BotConfig(
             token=self._config['BotConfig']['token'],
             languages=self._config['BotConfig']['languages'].split(),
+            timezone=int(self._config['BotConfig']['timezone']),
             admin_id=int(self._config['BotConfig']['admin_id']),
             chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
             main_chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['main_chats_id'].split()],
