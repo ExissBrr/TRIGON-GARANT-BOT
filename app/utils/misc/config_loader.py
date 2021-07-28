@@ -1,6 +1,6 @@
 import configparser
 
-from app.data.types.config import BotConfig, Config, DatabaseConfig
+from app.data.types.config import BotConfig, Config, DatabaseConfig, ImgbbConfig
 
 
 class ConfigLoader:
@@ -13,18 +13,22 @@ class ConfigLoader:
 
     @property
     def get_config(self) -> Config:
+        """Возвращает конфиг проекта."""
         config = Config(
             bot=self._get_bot_config,
-            database=self._get_database_config
+            database=self._get_database_config,
+            imgbb=self._get_imgbb_config,
         )
         return config
 
     @property
     def get_bot_commands(self):
+        """Возвращает конфиг команд бота"""
         return dict(self._config['BotCommands'])
 
     @property
     def _get_bot_config(self) -> BotConfig:
+        """Возвращает конфиг бота"""
         bot_config = BotConfig(
             token=self._config['BotConfig']['token'],
             languages=self._config['BotConfig']['languages'].split(),
@@ -37,7 +41,16 @@ class ConfigLoader:
         return bot_config
 
     @property
+    def _get_imgbb_config(self) -> ImgbbConfig:
+        """Возвращает конфиг сервиса хранения картинок"""
+        imgbb_config = ImgbbConfig(
+            token=self._config['ImgbbConfig']['token'],
+        )
+        return imgbb_config
+
+    @property
     def _get_database_config(self) -> DatabaseConfig:
+        """Возвращает конфиг базы данных"""
         host = self._config['DatabaseConfig']['host']
         port = self._config['DatabaseConfig']['port']
         db = self._config['DatabaseConfig']['db']

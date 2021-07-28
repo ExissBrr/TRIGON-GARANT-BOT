@@ -6,8 +6,8 @@ from aiogram.types import ParseMode
 from app.utils.misc.config_loader import ConfigLoader
 from app.utils.misc.links_loader import LinksLoader
 
-config = ConfigLoader('.config.ini').get_config
-links = LinksLoader('.links.ini').get_links
+config = ConfigLoader('.env').get_config
+links = LinksLoader('.links').get_links
 
 bot = Bot(
     token=config.bot.token,

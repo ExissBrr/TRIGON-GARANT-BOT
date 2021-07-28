@@ -23,8 +23,13 @@ class DatabaseConfig:
     db_pass: str
     url: str
 
+@dataclass
+class ImgbbConfig:
+    token: str
+
 
 @dataclass
 class Config:
     bot: BotConfig
     database: DatabaseConfig
+    imgbb: ImgbbConfig
