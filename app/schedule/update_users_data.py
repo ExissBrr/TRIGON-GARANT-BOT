@@ -10,8 +10,6 @@ from app.utils.db_api.models.user import User
 async def update_users_data():
     bot = Bot.get_current()
 
-    await sending_message.text_message('Бот отключается на технические работы')
-
     users: List[User] = await User.query.gino.all()
 
     count_updates = 0
