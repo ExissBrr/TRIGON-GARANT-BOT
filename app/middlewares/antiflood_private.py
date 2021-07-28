@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
 from aiogram.dispatcher.handler import current_handler, CancelHandler
 from aiogram.dispatcher.middlewares import BaseMiddleware
-from aiogram.types import Message
+from aiogram.types import Message, ChatType
 from aiogram.utils.exceptions import Throttled
 
 from app.data import text
@@ -11,12 +11,16 @@ from app.utils.db_api.models.user import User
 
 class AntiFloodMiddleware(BaseMiddleware):
     async def on_process_message(self, message: Message, data: dict):
+        if not ChatType.is_private(message):
+            return False
+
         handler = current_handler.get()
         dispatcher = Dispatcher.get_current()
         if handler and getattr(handler, 'no_limit', False):
             return False
         try:
             await dispatcher.throttle('key', rate=1.5)
+
         except Throttled as throttled:
             if await self.is_throttled(message, throttled):
                 raise CancelHandler()
