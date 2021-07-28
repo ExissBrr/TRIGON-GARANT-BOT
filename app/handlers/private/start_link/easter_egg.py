@@ -16,4 +16,4 @@ async def send_easter_egg(message: Message, user, message_args: dict):
         args=message.get_args(),
         user_id=user.id
     )
-    await message.answer_sticker('CAACAgIAAxkBAAECkTVg7DDRdxgSa1_s6M2fSVx0HLlYlwAC6QAD5bkIGk8D5NCmXq8dIAQ')
+    await message.answer('Easter egg :)')

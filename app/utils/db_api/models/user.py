@@ -9,7 +9,7 @@ from app.utils.db_api.db import BaseModel
 
 
 class User(BaseModel):
-    __tablename__ = 'users_template'
+    __tablename__ = 'users'
 
     id: int = Column(BigInteger, primary_key=True)
     username: str = Column(String(32))
