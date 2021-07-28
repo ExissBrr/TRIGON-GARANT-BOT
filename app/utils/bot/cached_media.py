@@ -27,7 +27,7 @@ async def get_photo_from_cache(photo: Union[PhotoSize, ChatPhoto], prefix: str):
         photo_file: BytesIO = await photo.download('app/data/tmp')
     else:
         photo_file: BytesIO = await photo.download_big(destination=f'app/data/tmp/{prefix}')
-    photo_file.close()
+
 
     while True:
         try:
@@ -39,7 +39,7 @@ async def get_photo_from_cache(photo: Union[PhotoSize, ChatPhoto], prefix: str):
         except Exception:
             await asyncio.sleep(2)
             continue
-        os.remove(photo_file.name)
+
         break
 
     await PhotoCache.insert(
@@ -47,6 +47,8 @@ async def get_photo_from_cache(photo: Union[PhotoSize, ChatPhoto], prefix: str):
         url=media.url,
         binary=photo_file.read()
     )
+    photo_file.close()
+    os.remove(photo_file.name)
     return media.url
 
 
