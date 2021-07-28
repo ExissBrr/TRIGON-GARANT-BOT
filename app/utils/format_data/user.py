@@ -5,14 +5,7 @@ from app.utils.db_api.models.user import User
 
 
 def format_username(username: Union[str, User], default: str = 'Not username') -> str:
-    """
-    Formatting username to string.
-    Args:
-        username: username
-
-    Returns:
-        Formatted username.
-    """
+    """Форматирует username"""
     if isinstance(username, User):
         username = username.username
 
