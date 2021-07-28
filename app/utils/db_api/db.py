@@ -15,8 +15,8 @@ class BaseModel(db.Model):
     __tablename__: str
     query: Query
 
-    create_at: datetime.datetime = Column(DateTime, default=datetime.datetime.utcnow())
-    update_at: datetime.datetime = Column(DateTime, default=datetime.datetime.utcnow(), server_onupdate=db.func.now())
+    create_at: datetime.datetime = Column(DateTime, server_default=db.func.now())
+    update_at: datetime.datetime = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
     async def update_data(self, **kwargs):
         """
@@ -28,10 +28,11 @@ class BaseModel(db.Model):
         logger.success(f"Db: {self.__tablename__} (id: {self.id}) set new param {kwargs}")
 
     @classmethod
-    async def insert(cls, **kwargs):
+    async def insert(cls, **kwargs) -> db.Model:
         model = cls(**kwargs)
         logger.success(f'Db: {model.__tablename__} (id: {model.id}) new row {kwargs}')
         await model.create()
+        return model
 
     @classmethod
     def qf(cls, op: str = 'and', **kwargs):
