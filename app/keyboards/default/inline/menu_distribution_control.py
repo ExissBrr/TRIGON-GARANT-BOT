@@ -10,7 +10,7 @@ def make_keyboard(lang_code, messages):
             [
                 InlineKeyboardButton(
                     text=text[lang_code].button.inline.add_schedule,
-                    callback_data=distribution_cd.new(id=0, command=DistributionCommands.ADD_SCHEDULE)
+                    callback_data=distribution_cd.new(id=None, command=DistributionCommands.ADD_SCHEDULE)
                 )
             ]
         ]
