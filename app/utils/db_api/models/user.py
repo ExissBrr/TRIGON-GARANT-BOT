@@ -35,23 +35,34 @@ class User(BaseModel):
 
     @property
     def url_to_telegram(self) -> str:
+        """Возвращает ссылку на пользователя в телеграм."""
         return f"tg://user?id={self.id}"
 
 
     @property
     def get_username_history(self) -> list:
+        """Возвращает список username, смененных пользователем"""
         return self.username_history.rstrip().split()
 
     @property
     def get_fullname_history(self) -> list:
+        """Возвращает список имен, смененных пользователем"""
         return self.fullname_history.rstrip().split()
 
     def is_role(self, roles: Union[str, List[str]]) -> bool:
+        """Проверка на роль пользователя"""
         if isinstance(roles, list):
+            if UserRole.ADMIN in roles and self.id == config.bot.admin_id:
+                return True
             return self.role in roles
+
+        if roles == UserRole.ADMIN:
+            return self.role == UserRole.ADMIN or self.id == config.bot.admin_id
+
         return self.role == roles
 
     async def update_fullname(self, fullname):
+        """Обновляет имя пользователя и заносит предыдущее имя в историю измененных"""
         if self.fullname == fullname:
             return False
 
@@ -61,6 +72,7 @@ class User(BaseModel):
         await self.update_data(fullname=fullname)
 
     async def update_username(self, username):
+        """Обновляет username пользователя и заносит предыдущее имя в историю измененных"""
         if self.username == username:
             return False
 
