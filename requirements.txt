@@ -8,3 +8,4 @@ openpyxl
 aioschedule
 captcha
 aioimgbb
+wheezy.captcha

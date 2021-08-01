@@ -9,11 +9,11 @@ config = ConfigLoader('.env').get_config
 links = LinksLoader('.links').get_links
 
 is_flood_defender: bool = False
-flood_defender_time: int = 30
+flood_defender_time: int = 6
 
 bot = Bot(
     token=config.bot.token,
-    parse_mode=ParseMode.HTML,
+    parse_mode=ParseMode.HTML
 )
 
 dp = Dispatcher(

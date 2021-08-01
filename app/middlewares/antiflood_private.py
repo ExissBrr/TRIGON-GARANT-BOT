@@ -11,9 +11,8 @@ from app.utils.db_api.models.user import User
 
 class AntiFloodMiddleware(BaseMiddleware):
     async def on_process_message(self, message: Message, data: dict):
-        if not ChatType.is_private(message):
+        if not message.chat.type == ChatType.PRIVATE:
             return False
-
 
         handler = current_handler.get()
         dispatcher = Dispatcher.get_current()

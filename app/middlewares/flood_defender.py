@@ -1,9 +1,11 @@
-from aiogram.dispatcher.handler import CancelHandler
+from time import sleep
 
-import app
+from aiogram.dispatcher.handler import CancelHandler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.types import Update, ChatType, Message
+from loguru import logger
 
+import app
 from app.data import text
 from app.data.types.user_data import UserCaptchaText
 from app.utils.bot.languages import get_lang_code
@@ -16,11 +18,9 @@ class FloodDefenderMiddleware(BaseMiddleware):
 
     async def on_pre_process_update(self, update: Update, *args):
         obj = update.message or update.callback_query or update.inline_query
-
-        if not ChatType.is_private(obj):
+        logger.debug(app.loader.is_flood_defender)
+        if not obj.chat.type == ChatType.PRIVATE:
             return False
-
-
 
         user_from_telegram = obj.from_user
         user: User = await User.get(user_from_telegram.id)
@@ -31,9 +31,10 @@ class FloodDefenderMiddleware(BaseMiddleware):
         if isinstance(obj, Message) and user.captcha_text != UserCaptchaText.NONE:
 
             if obj.text and CaptchaImage.check_answer(user.captcha_text, obj.text):
-                await user.update(captcha_text=UserCaptchaText.NONE)
+                await user.update_data(captcha_text=UserCaptchaText.NONE)
                 return await obj.answer('✅')
-        elif user.captcha_text != UserCaptchaText.NONE:
+
+        if user.captcha_text != UserCaptchaText.NONE:
             raise CancelHandler()
 
         if not app.loader.is_flood_defender:
@@ -43,13 +44,13 @@ class FloodDefenderMiddleware(BaseMiddleware):
 
         captcha_photo = CaptchaImage(captcha_text)
 
-        lang_code = get_lang_code()
+        lang_code = await get_lang_code()
 
         await obj.bot.send_photo(
             chat_id=user.id,
             photo=captcha_photo.input_file,
-            caption=text[lang_code].default.message.flood_defender_captcha_text(
-                captcha_text=captcha_text
-            )
+            caption=text[lang_code].default.message.flood_defender_captcha_text
         )
-        await user.update(captcha_text=captcha_text)
+        await user.update_data(captcha_text=captcha_text)
+        sleep(0.2)
+        raise CancelHandler()

@@ -9,7 +9,7 @@ class ConfigLoader:
         self._path_to_config = path_to_config
         self._config = configparser.ConfigParser()
 
-        self._config.read(self._path_to_config)
+        self._config.read(self._path_to_config, encoding='UTF-8')
 
     @property
     def get_config(self) -> Config:
