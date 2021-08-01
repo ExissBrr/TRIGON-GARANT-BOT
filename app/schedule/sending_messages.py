@@ -3,8 +3,6 @@ import time
 from typing import List
 
 from app.data import text
-from app.data.types.bargain_data import BargainStatus
-from app.data.types.payments_data import PaymentType, PaymentSystem, PaymentStatus
 from app.data.types.user_data import UserDeepLink, UserRole
 from app.keyboards.default.inline import generator_button_url
 from app.loader import config

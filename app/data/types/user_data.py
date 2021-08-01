@@ -14,3 +14,6 @@ class UserPhone:
 
 class UserDataHistory:
     NONE = ''
+
+class UserCaptchaText:
+    NONE = ''

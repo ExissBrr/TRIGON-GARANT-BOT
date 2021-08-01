@@ -8,6 +8,9 @@ from app.utils.misc.links_loader import LinksLoader
 config = ConfigLoader('.env').get_config
 links = LinksLoader('.links').get_links
 
+is_flood_defender: bool = False
+flood_defender_time: int = 30
+
 bot = Bot(
     token=config.bot.token,
     parse_mode=ParseMode.HTML,

@@ -30,5 +30,6 @@ class CaptchaImage(PhotoFile):
 
         self.__image_captcha.write(self.__text, self.path_to_file, format=self.extension)
 
-    def check_answer(self, text) -> bool:
-        return str(text).upper() == self.__text
+    @staticmethod
+    def check_answer(captcha_text, text) -> bool:
+        return str(captcha_text).upper() == str(text).upper()

@@ -3,7 +3,7 @@ from typing import List, Union
 
 from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, Integer
 
-from app.data.types.user_data import UserRole, UserDeepLink, UserPhone, UserDataHistory
+from app.data.types.user_data import UserRole, UserDeepLink, UserPhone, UserDataHistory, UserCaptchaText
 from app.loader import config
 from app.utils.db_api.db import BaseModel
 
@@ -30,6 +30,8 @@ class User(BaseModel):
     is_blocked: bool = Column(Boolean, default=False)
     is_active: bool = Column(Boolean, default=True)
     reason_for_blocking: str = Column(String(255))
+
+    captcha_text: str = Column(String(8), default=UserCaptchaText.NONE)
 
     online_at: dt.datetime = Column(DateTime(), default=dt.datetime.utcnow())
 

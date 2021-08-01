@@ -14,6 +14,7 @@ class AntiFloodMiddleware(BaseMiddleware):
         if not ChatType.is_private(message):
             return False
 
+
         handler = current_handler.get()
         dispatcher = Dispatcher.get_current()
         if handler and getattr(handler, 'no_limit', False):
