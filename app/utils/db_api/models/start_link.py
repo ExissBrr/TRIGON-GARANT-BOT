@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, Sequence, String
+from sqlalchemy import Column, BigInteger, Sequence, String, ForeignKey
 
 from app.utils.db_api.db import BaseModel
 
@@ -10,4 +10,4 @@ class StartLinkHistory(BaseModel):
     type: str = Column(String(12))
     prefix: str = Column(String(64))
     args: str = Column(String(64))
-    user_id: str = Column(BigInteger)
+    user_id: int = Column(ForeignKey('users.id'))
