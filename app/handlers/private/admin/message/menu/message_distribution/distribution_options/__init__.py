@@ -12,5 +12,7 @@ from .wait_confirm_create_schedule import dp
 from .wait_confirm_delete_schedule import dp
 from .wait_confirm_suspend_schedule import dp
 from .wait_confirm_activate_schedule import dp
+from .skip_proceed_roles import dp
+from .wait_for_role import dp
 
 __all__ = ['dp']

@@ -1,9 +1,9 @@
 from aiogram.dispatcher import FSMContext
-from aiogram.types import Message, ContentType
+from aiogram.types import Message
 
 from app.data import text
 from app.handlers.private.admin.message.menu.message_distribution.distribution_options._request_data import \
-    request_for_time, request_for_chat_id
+    request_for_roles
 from app.loader import dp
 from app.states.private.message_distribution import MessageSendingStates
 
@@ -25,7 +25,7 @@ async def wait_for_media(message: Message, state: FSMContext, state_data, lang_c
 
     await state.update_data(urls=links)
 
-    await MessageSendingStates.wait_for_chat_id.set()
+    await MessageSendingStates.wait_for_roles.set()
 
     # Request chats id
-    await request_for_chat_id(message, lang_code)
+    await request_for_roles(message, lang_code)

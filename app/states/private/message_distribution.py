@@ -10,6 +10,8 @@ class MessageSendingStates(StatesGroup):
 
     wait_for_url = State()
 
+    wait_for_roles=State()
+
     wait_for_chat_id = State()
 
     wait_confirm_create_schedule = State()

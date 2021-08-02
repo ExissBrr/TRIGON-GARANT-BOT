@@ -1,8 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ContentType
-from loguru import logger
 
-from app import keyboards
 from app.data import text
 from app.data.text.ru.button.reply import confirm
 from app.loader import dp
@@ -20,6 +18,7 @@ async def add_schedule_in_db(message: Message, state: FSMContext, user, lang_cod
     distribution_media_type = state_data.get('media_type', ContentType.TEXT)
     distribution_time = state_data.get('time', '15:00')
     distribution_chats_id = state_data.get('chats_id', None)
+    distribution_roles = state_data.get('roles', None)
     links = ''
     for title, link in distribution_urls.items():
         links += f"{title}:{link} "
@@ -31,6 +30,7 @@ async def add_schedule_in_db(message: Message, state: FSMContext, user, lang_cod
         links_btn=links,
         time=distribution_time,
         chats_id=distribution_chats_id,
+        roles=distribution_roles
     )
     await message.answer(
         text=text[lang_code].default.message.added
