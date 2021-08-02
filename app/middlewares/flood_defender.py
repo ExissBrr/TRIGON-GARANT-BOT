@@ -8,6 +8,7 @@ from loguru import logger
 import app
 from app.data import text
 from app.data.types.user_data import UserCaptchaText
+from app.loader import flood_user_in_processing
 from app.utils.bot.languages import get_lang_code
 from app.utils.captcha.image_captcha import CaptchaImage
 from app.utils.captcha.tools import generate_random_text
@@ -18,7 +19,6 @@ class FloodDefenderMiddleware(BaseMiddleware):
 
     async def on_pre_process_update(self, update: Update, *args):
         obj = update.message or update.callback_query or update.inline_query
-        logger.debug(app.loader.is_flood_defender)
         if not obj.chat.type == ChatType.PRIVATE:
             return False
 
@@ -32,13 +32,20 @@ class FloodDefenderMiddleware(BaseMiddleware):
 
             if obj.text and CaptchaImage.check_answer(user.captcha_text, obj.text):
                 await user.update_data(captcha_text=UserCaptchaText.NONE)
-                return await obj.answer('✅')
+                await obj.answer('✅')
+                raise CancelHandler()
+
 
         if user.captcha_text != UserCaptchaText.NONE:
             raise CancelHandler()
 
         if not app.loader.is_flood_defender:
             return False
+
+        if user.id in flood_user_in_processing:
+            raise CancelHandler
+        else:
+            flood_user_in_processing.append(user.id)
 
         captcha_text = generate_random_text()
 
@@ -51,6 +58,9 @@ class FloodDefenderMiddleware(BaseMiddleware):
             photo=captcha_photo.input_file,
             caption=text[lang_code].default.message.flood_defender_captcha_text
         )
+
+        if user.captcha_text != UserCaptchaText.NONE:
+            raise CancelHandler()
+
         await user.update_data(captcha_text=captcha_text)
-        sleep(0.2)
         raise CancelHandler()
