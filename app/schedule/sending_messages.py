@@ -17,7 +17,7 @@ async def sending_notifications():
     time_now = dt.datetime.utcnow()
     time_h_m = f'{time_now.hour}:{time_now.minute}'
     messages: List[MessageForSending] = await MessageForSending.query.where(
-        MessageForSending.time==time_h_m).where(MessageForSending.is_active).gino.all()
+        MessageForSending.time == time_h_m).where(MessageForSending.is_active).gino.all()
 
     for message in messages:
         await sending_message.text_message(

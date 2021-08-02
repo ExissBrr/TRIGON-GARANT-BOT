@@ -5,10 +5,11 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Chat
 from app.data import text
 
 
-def keyboard(chats: List[Chat], lang_code):
+def keyboard(chats: List[Chat], lang_code,can_continue=True):
     markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     markup.row(KeyboardButton(text[lang_code].button.reply.cancel))
-    markup.row(KeyboardButton(text[lang_code].button.reply.skip))
+    if can_continue:
+        markup.row(KeyboardButton(text[lang_code].button.reply.skip))
     for chat in chats:
         title = chat.title
         id = chat.id

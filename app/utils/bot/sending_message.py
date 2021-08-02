@@ -95,7 +95,7 @@ async def text_message(text: str,
 
 
 async def copy_message(message: Message,
-                       roles: str = None,
+                       roles: Union[str, List[str]] = None,
                        chats_id: List[int] = None,
                        markup: InlineKeyboardMarkup = None,
                        **where_conditions
@@ -139,12 +139,10 @@ async def copy_message(message: Message,
 
 
 async def forward_message(message: Message,
-                          roles: str = None,
+                          roles: Union[str, List[str]] = None,
                           chats_id: List[int] = None,
                           **where_conditions
                           ) -> List[int]:
-
-
     bot = Bot.get_current()
     list_not_success = []
 

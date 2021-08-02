@@ -1,9 +1,7 @@
-import datetime
 from typing import List
 
 from aiogram.types import ContentType
-from loguru import logger
-from sqlalchemy import Column, BigInteger, Sequence, String, Integer, DateTime, Boolean
+from sqlalchemy import Column, BigInteger, Sequence, String, Boolean
 
 from app.data.types.user_data import UserRole
 from app.utils.db_api.db import BaseModel
@@ -42,7 +40,7 @@ class MessageForSending(BaseModel):
         return [int(chat_id) for chat_id in self.chats_id.split()]
 
     @property
-    def get_roles(self) -> List[int]:
+    def get_roles(self) -> List[str]:
         if not self.chats_id:
             return []
         return [role for role in self.roles.split() if role in UserRole.__dict__.values()]

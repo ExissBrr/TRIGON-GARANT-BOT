@@ -4,8 +4,6 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 class MessageSendingStates(StatesGroup):
     wait_for_delayed_message = State()
 
-    wait_for_message = State()
-
     wait_for_time = State()
 
     wait_for_media = State()
@@ -21,3 +19,13 @@ class MessageSendingStates(StatesGroup):
     wait_confirm_suspend_schedule = State()
 
     wait_confirm_activate_schedule = State()
+
+
+class MomentaryMessageSendingStates(StatesGroup):
+    wait_for_roles = State()
+
+    wait_for_chats = State()
+
+    wait_for_message = State()
+
+    wait_for_approval = State()

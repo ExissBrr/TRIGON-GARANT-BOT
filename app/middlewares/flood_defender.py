@@ -1,10 +1,6 @@
-from symbol import return_stmt
-from time import sleep
-
 from aiogram.dispatcher.handler import CancelHandler
 from aiogram.dispatcher.middlewares import BaseMiddleware
-from aiogram.types import Update, ChatType, Message
-from loguru import logger
+from aiogram.types import Update, ChatType, Message, CallbackQuery
 
 import app
 from app.data import text
@@ -20,8 +16,12 @@ class FloodDefenderMiddleware(BaseMiddleware):
 
     async def on_pre_process_update(self, update: Update, *args):
         obj = update.message or update.callback_query or update.inline_query
-        if not obj.chat.type == ChatType.PRIVATE:
-            return CancelHandler
+        if isinstance(obj, Message):
+            if not obj.chat.type == ChatType.PRIVATE:
+                return CancelHandler
+        elif isinstance(obj,CallbackQuery):
+            if not obj.message.chat.type == ChatType.PRIVATE:
+                return CancelHandler
 
         user_from_telegram = obj.from_user
         user: User = await User.get(user_from_telegram.id)
@@ -38,7 +38,6 @@ class FloodDefenderMiddleware(BaseMiddleware):
                 except:
                     pass
                 raise CancelHandler
-
 
         if user.captcha_text != UserCaptchaText.NONE:
             raise CancelHandler

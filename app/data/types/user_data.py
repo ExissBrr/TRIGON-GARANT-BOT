@@ -1,6 +1,7 @@
 class UserRole:
     ADMIN = 'admin'
     DEFAULT = 'default'
+    ROLES = [ADMIN, DEFAULT]
 
 
 class UserDeepLink:
@@ -14,6 +15,7 @@ class UserPhone:
 
 class UserDataHistory:
     NONE = ''
+
 
 class UserCaptchaText:
     NONE = ''

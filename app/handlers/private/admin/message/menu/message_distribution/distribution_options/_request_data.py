@@ -2,14 +2,24 @@ from aiogram.types import Message, ContentType
 
 from app import keyboards
 from app.data import text
+from app.data.types.user_data import UserRole
 from app.loader import config
 
 
-async def request_for_chat_id(message: Message, lang_code):
+async def request_for_chat_id(message: Message, lang_code,is_roles):
     chats = [await message.bot.get_chat(chat_id) for chat_id in config.bot.chats_id]
+
     await message.answer(
         text=text[lang_code].default.message.request_for_chat_id,
-        reply_markup=keyboards.default.reply.skip_and_chats.keyboard(chats, lang_code),
+        reply_markup=keyboards.default.reply.skip_and_chats.keyboard(chats, lang_code,can_continue=is_roles),
+    )
+
+
+async def request_for_roles(message: Message, lang_code):
+    roles = UserRole.ROLES
+    await message.answer(
+        text=text[lang_code].default.message.send_distribution_roles,
+        reply_markup=keyboards.default.reply.skip_and_roles.keyboard(roles, lang_code),
     )
 
 
@@ -30,7 +40,7 @@ async def request_for_url_button(message: Message, lang_code):
 async def request_for_time(message: Message, lang_code):
     await message.answer(
         text=text[lang_code].default.message.send_time,
-        reply_markup=app.keyboards.default.reply.hours_and_minutes_list.keyboard(lang_code)
+        reply_markup=keyboards.default.reply.hours_and_minutes_list.keyboard(lang_code)
     )
 
 
