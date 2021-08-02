@@ -9,7 +9,7 @@ config = ConfigLoader('.env').get_config
 links = LinksLoader('.links').get_links
 
 is_flood_defender: bool = False
-flood_defender_time: int = 6
+flood_timeout: int = 6
 flood_user_in_processing: list[int] = []
 
 bot = Bot(

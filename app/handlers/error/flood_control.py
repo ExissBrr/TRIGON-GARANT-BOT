@@ -8,7 +8,7 @@ from aiogram.utils.exceptions import RetryAfter
 from loguru import logger
 
 import app
-from app.loader import dp, flood_defender_time, flood_user_in_processing
+from app.loader import dp, flood_timeout, flood_user_in_processing
 
 
 @dp.errors_handler()
@@ -29,7 +29,7 @@ async def on_flood_defender(update: Update, exception):
 
         await dp.process_updates(updates)
 
-        await asyncio.sleep(flood_defender_time)
+        await asyncio.sleep(flood_timeout)
 
         app.loader.is_flood_defender = False
 

@@ -21,7 +21,7 @@ async def sending_notifications():
 
     for message in messages:
         await sending_message.text_message(
-            roles=[UserRole.ADMIN, UserRole.DEFAULT],
+            roles=message.get_roles,
             content_type=message.content_type,
             file_id=message.media_id,
             text=message.text,
