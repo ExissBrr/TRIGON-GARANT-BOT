@@ -5,6 +5,7 @@ from aiogram.types import ContentType
 from loguru import logger
 from sqlalchemy import Column, BigInteger, Sequence, String, Integer, DateTime, Boolean
 
+from app.data.types.user_data import UserRole
 from app.utils.db_api.db import BaseModel
 
 
@@ -18,6 +19,7 @@ class MessageForSending(BaseModel):
     links_btn: str = Column(String)
     time: str = Column(String(30))
     chats_id: str = Column(String(100))
+    roles: str = Column(String(50))
 
     def is_content_type(self, content_type: str) -> bool:
         return self.content_type == content_type
@@ -38,3 +40,9 @@ class MessageForSending(BaseModel):
         if not self.chats_id:
             return []
         return [int(chat_id) for chat_id in self.chats_id.split()]
+
+    @property
+    def get_roles(self) -> List[int]:
+        if not self.chats_id:
+            return []
+        return [role for role in self.roles.split() if role in UserRole.__dict__.values()]
