@@ -1,7 +1,7 @@
 import datetime as dt
 from typing import List, Union
 
-from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, Integer
+from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, Integer, Float
 
 from app.data.types.user_data import UserRole, UserDeepLink, UserPhone, UserDataHistory, UserCaptchaText
 from app.loader import config
@@ -14,6 +14,7 @@ class User(BaseModel):
     id: int = Column(BigInteger, primary_key=True)
     username: str = Column(String(32))
     fullname: str = Column(String(128))
+    balance: float = Column(Float(precision=1, asdecimal=True, decimal_return_scale=True), default=0)
     lang_code: str = Column(String(10), default=config.bot.languages[0])
     deep_link: int = Column(BigInteger, default=UserDeepLink.NONE)
     timezone: int = Column(Integer, default=config.bot.timezone)

@@ -3,3 +3,8 @@ delete = '🚫Удалить'
 suspend = '⛔Приостановить️'
 activate = '✅Активировать'
 bot_rules = '📃Правила бота'
+top_up_balance = '💵Пополнить баланс'
+withdraw_balance = '💸Вывести баланс'
+my_bargains = '🤝Мои сделки'
+requisites = '📖Реквизиты'
+

@@ -3,21 +3,24 @@ from sqlalchemy import distinct
 
 from app import keyboards
 from app.data import text
+from app.data.text.ru.button.reply import profile
 from app.data.types.bargain_data import BargainStatusType, BargainRate
+from app.loader import dp
 from app.utils.db_api import db
 from app.utils.db_api.models.bargain import Bargain
 from app.utils.db_api.models.feedback import Feedback
 from app.utils.db_api.models.user import User
 from app.utils.db_api.models.views import View
+from app.utils.format_data.time import timezone
 from app.utils.format_data.user import format_rate
 
 
-@dp.message_handler(reply_command=text.button.reply.default.menu_profile)
+@dp.message_handler(reply_command=profile)
 async def send_profile(message: Message, user: User, lang_code):
     list_shopping = await Bargain.query.where(Bargain.status == BargainStatusType.CLOSED_SUCCESSFUL).where(
-        Bargain.buyer_id == user.id).gino.all()
+        Bargain.buyer_user_id == user.id).gino.all()
     list_sales = await Bargain.query.where(Bargain.status == BargainStatusType.CLOSED_SUCCESSFUL).where(
-        Bargain.seller_id == user.id).gino.all()
+        Bargain.seller_user_id == user.id).gino.all()
     feedback_count = await db.select([db.func.count(Bargain.rate)]). \
         where(Bargain.rate != BargainRate.NONE). \
         where(Bargain.seller_user_id == user.id).gino.scalar() or 0
@@ -40,18 +43,19 @@ async def send_profile(message: Message, user: User, lang_code):
     link_feedback = 'Отзывы отсутствуют'
 
     bot_data = await message.bot.get_me()
-    feedbacks = await Feedback.query.where(Feedback.seller_user_id == message.from_user.id)
+    feedbacks = await Feedback.query.where(Feedback.seller_user_id == message.from_user.id).gino.all()
     if feedbacks:
         link_feedback = f'<a href="t.me/{bot_data.username}?start=feedback_{user.id}">Ссылка на отзывы</a>'
 
     await message.answer_photo(
         photo=photo,
-        caption=text.message.menu.default.profile.format(
+        caption=text[lang_code].default.message.profile.format(
             user_id=user.id,
+            user_prefix=user.prefix,
             user_username=user.username,
-            registration_date=str(user.create_at).split('.')[0],
+            registration_date=timezone(user.create_at, user.timezone).strftime('%Y-%m-%d %H:%M'),
             user_balance=round(user.balance, 2),
-            user_rate=await format_rate(total_rate, feedback_count),
+            user_rate=format_rate(total_rate, feedback_count),
             count_views=view_count,
             total_amount_shopping=sum([bargain.amount for bargain in list_shopping]),
             total_amount_sales=sum([bargain.amount for bargain in list_sales]),

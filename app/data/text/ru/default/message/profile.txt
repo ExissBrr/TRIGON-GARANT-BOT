@@ -1,4 +1,14 @@
-<b>Личный кабине<a href="{start_link_easter_egg}">т</a></b>
-Дата регистрации: {datetime_register}
-ID: {user_id}
-Username: {user_username}
+Личный кабинет.
+
+<b>Ваш id:</b> <code>{user_id}</code> {user_prefix}
+<b>Ваш username:</b> <code>{user_username}</code>
+<b>Дата регистрации:</b> <code>{registration_date}</code>
+
+<b>Ваш баланс:</b> {user_balance}₽
+
+<b>Ваш рейтинг:</b> {user_rate}
+<b>Просмотров профиля:</b> {count_views}
+<b>Общая сумма покупок:</b> {total_amount_shopping}₽
+<b>Общая сумма продаж:</b> {total_amount_sales}₽
+
+<b>Ссылка на ваши отзывы</b>: {link_feedback}
