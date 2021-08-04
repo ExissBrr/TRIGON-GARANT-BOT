@@ -4,32 +4,32 @@ from sqlalchemy import distinct
 from app import keyboards
 from app.data import text
 from app.data.text.ru.button.reply import profile
-from app.data.types.bargain_data import BargainStatusType, BargainRate
+from app.data.types.bargain_data import DealStatusType, DealRate
 from app.loader import dp
 from app.utils.db_api import db
-from app.utils.db_api.models.bargain import Bargain
+from app.utils.db_api.models.deals import Deal
 from app.utils.db_api.models.feedback import Feedback
 from app.utils.db_api.models.user import User
-from app.utils.db_api.models.views import View
+from app.utils.db_api.models.user_views import UserView
 from app.utils.format_data.time import timezone
 from app.utils.format_data.user import format_rate
 
 
 @dp.message_handler(reply_command=profile)
 async def send_profile(message: Message, user: User, lang_code):
-    list_shopping = await Bargain.query.where(Bargain.status == BargainStatusType.CLOSED_SUCCESSFUL).where(
-        Bargain.buyer_user_id == user.id).gino.all()
-    list_sales = await Bargain.query.where(Bargain.status == BargainStatusType.CLOSED_SUCCESSFUL).where(
-        Bargain.seller_user_id == user.id).gino.all()
-    feedback_count = await db.select([db.func.count(Bargain.rate)]). \
-        where(Bargain.rate != BargainRate.NONE). \
-        where(Bargain.seller_user_id == user.id).gino.scalar() or 0
-    total_rate = await db.select([db.func.sum(Bargain.rate)]). \
-        where(Bargain.rate != BargainRate.NONE). \
-        where(Bargain.seller_user_id == user.id).gino.scalar() or 0
+    list_shopping = await Deal.query.where(Deal.status == DealStatusType.CLOSED_SUCCESSFUL).where(
+        Deal.buyer_user_id == user.id).gino.all()
+    list_sales = await Deal.query.where(Deal.status == DealStatusType.CLOSED_SUCCESSFUL).where(
+        Deal.seller_user_id == user.id).gino.all()
+    feedback_count = await db.select([db.func.count(Deal.rate)]). \
+        where(Deal.rate != DealRate.NONE). \
+        where(Deal.seller_user_id == user.id).gino.scalar() or 0
+    total_rate = await db.select([db.func.sum(Deal.rate)]). \
+        where(Deal.rate != DealRate.NONE). \
+        where(Deal.seller_user_id == user.id).gino.scalar() or 0
 
-    view_count = await db.select([db.func.count(distinct(View.viewer_user_id))]).where(
-        View.user_id == user.id).gino.scalar()
+    view_count = await db.select([db.func.count(distinct(UserView.viewer_user_id))]).where(
+        UserView.user_id == user.id).gino.scalar()
 
     photos = await message.from_user.get_profile_photos()
     try:

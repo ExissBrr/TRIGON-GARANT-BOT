@@ -18,7 +18,7 @@ class User(BaseModel):
     lang_code: str = Column(String(10), default=config.bot.languages[0])
     deep_link: int = Column(BigInteger, default=UserDeepLink.NONE)
     timezone: int = Column(Integer, default=config.bot.timezone)
-    prefix: str = Column(String(60))
+    prefix: str = Column(String(60), default='')
 
     phone: str = Column(String(24), default=UserPhone.NONE)
 
@@ -40,7 +40,6 @@ class User(BaseModel):
     def url_to_telegram(self) -> str:
         """Возвращает ссылку на пользователя в телеграм."""
         return f"tg://user?id={self.id}"
-
 
     @property
     def get_username_history(self) -> list:
