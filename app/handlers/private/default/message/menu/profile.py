@@ -17,16 +17,18 @@ from app.utils.format_data.user import format_rate
 
 @dp.message_handler(reply_command=profile)
 async def send_profile(message: Message, user: User, lang_code):
-    list_shopping = await Deal.query.where(Deal.status == DealStatusType.CLOSED_SUCCESSFUL).where(
+    list_shopping = await Deal.query.where(Deal.status == DealStatusType.CLOSED).where(
         Deal.buyer_user_id == user.id).gino.all()
-    list_sales = await Deal.query.where(Deal.status == DealStatusType.CLOSED_SUCCESSFUL).where(
+    list_sales = await Deal.query.where(Deal.status == DealStatusType.CLOSED).where(
         Deal.seller_user_id == user.id).gino.all()
-    feedback_count = await db.select([db.func.count(Deal.rate)]). \
-        where(Deal.rate != DealRate.NONE). \
-        where(Deal.seller_user_id == user.id).gino.scalar() or 0
-    total_rate = await db.select([db.func.sum(Deal.rate)]). \
-        where(Deal.rate != DealRate.NONE). \
-        where(Deal.seller_user_id == user.id).gino.scalar() or 0
+
+    feedback_count = await db.select([db.func.count(Feedback.rate)]). \
+        where(Feedback.rate != DealRate.NONE). \
+        where(Feedback.receiver_user_id == user.id).gino.scalar() or 0
+
+    total_rate = await db.select([db.func.sum(Feedback.rate)]). \
+        where(Feedback.rate != DealRate.NONE). \
+        where(Feedback.receiver_user_id == user.id).gino.scalar() or 0
 
     view_count = await db.select([db.func.count(distinct(UserView.viewer_user_id))]).where(
         UserView.user_id == user.id).gino.scalar()
@@ -43,7 +45,7 @@ async def send_profile(message: Message, user: User, lang_code):
     link_feedback = 'Отзывы отсутствуют'
 
     bot_data = await message.bot.get_me()
-    feedbacks = await Feedback.query.where(Feedback.seller_user_id == message.from_user.id).gino.all()
+    feedbacks = await Feedback.query.where(Feedback.receiver_user_id == message.from_user.id).gino.all()
     if feedbacks:
         link_feedback = f'<a href="t.me/{bot_data.username}?start=feedback_{user.id}">Ссылка на отзывы</a>'
 

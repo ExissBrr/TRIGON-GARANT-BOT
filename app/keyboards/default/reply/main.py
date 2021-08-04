@@ -8,7 +8,13 @@ def keyboard(lang_code) -> ReplyKeyboardMarkup:
         resize_keyboard=True,
         keyboard=[
             [
+                KeyboardButton(text[lang_code].button.reply.search_users)
+            ],
+            [
                 KeyboardButton(text[lang_code].button.reply.profile)
+            ],
+            [
+                KeyboardButton(text[lang_code].button.reply.menu_help)
             ]
         ]
     )
