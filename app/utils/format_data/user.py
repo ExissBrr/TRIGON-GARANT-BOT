@@ -1,5 +1,6 @@
 from typing import Union
 
+from app.data.types.bargain_data import BargainRate
 from app.data.types.lang import LangCode
 from app.utils.db_api.models.user import User
 
@@ -54,3 +55,19 @@ def format_lang_code(lang_code: str) -> str:
         return '🇺🇸 English'
 
     return 'He yдaлocb oпpeдeлutb Я3ыk'
+
+
+def format_rate(total: float, count):
+    if total == BargainRate.NONE or total is None or count == 0:
+        return '-'
+    total /= count
+    rate_star = "🌕" * int(total)
+    if total % 1 >= 0.7:
+        rate_star += "🌖"
+    elif total % 1 >= 0.5:
+        rate_star += '🌗'
+    elif total % 1 >= 0.2:
+        rate_star += '🌘'
+    dark_star = int(5 - total) * "🌑"
+    rate_star += dark_star
+    return rate_star
