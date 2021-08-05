@@ -1,0 +1,3 @@
+<b>Подтверждение отзыва</b>
+<u>{feedback_comment}</u>
+<b>Оценка сделки</b>: {feedback_rate}

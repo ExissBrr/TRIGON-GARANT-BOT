@@ -11,3 +11,4 @@ from . import menu_message_distribution
 from . import hours_and_minutes_list
 from . import skip_and_roles
 from . import proceed_and_roles
+from . import rates
