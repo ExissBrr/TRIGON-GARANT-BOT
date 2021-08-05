@@ -11,6 +11,4 @@ class Deal(BaseModel):
     seller_user_id: int = Column(ForeignKey('users.id'))
     buyer_user_id: int = Column(ForeignKey('users.id'))
     amount: float = Column(Float(precision=1, asdecimal=True, decimal_return_scale=True))
-    category_id: str = Column(ForeignKey('service_categories.id'))
-    title: str = Column(String(30), default='')
     feedback_id: str = Column(ForeignKey('feedbacks.id'))

@@ -1,0 +1,7 @@
+🤝Заключена сделка!
+ID Сделки: {deal_id}.
+
+<b><a href="{seller_link_to_telegram}">🏬Продавец</a></b>: <code>{seller_user_id}</code> {seller_user_prefix}
+<b><a href="{buyer_link_to_telegram}">🛍Покупатель</a></b>: <code>{buyer_user_id}</code> {buyer_user_prefix}
+
+<b>Сумма сделки</b> {deal_amount}₽
