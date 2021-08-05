@@ -4,3 +4,4 @@ from . import menu_distribution_control
 from . import menu_profile
 from . import user_search
 from . import menu
+from . import deals
