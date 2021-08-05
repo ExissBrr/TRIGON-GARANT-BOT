@@ -1,6 +1,6 @@
 from sqlalchemy import Column, BigInteger, Sequence, String, Float, Integer, ForeignKey
 
-from app.data.types.bargain_data import DealStatusType, DealRate, DealFeedback
+from app.data.types.bargain_data import DealStatusType, FeedbackRate, DealFeedback
 from app.utils.db_api.db import BaseModel
 
 

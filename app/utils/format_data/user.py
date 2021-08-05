@@ -1,6 +1,6 @@
 from typing import Union
 
-from app.data.types.bargain_data import DealRate
+from app.data.types.bargain_data import FeedbackRate
 from app.data.types.lang import LangCode
 from app.utils.db_api.models.user import User
 
@@ -58,7 +58,7 @@ def format_lang_code(lang_code: str) -> str:
 
 
 def format_rate(total: float, count):
-    if total == DealRate.NONE or total is None or count == 0:
+    if total == FeedbackRate.NONE or total is None or count == 0:
         return '-'
     total /= count
     rate_star = "🌕" * int(total)

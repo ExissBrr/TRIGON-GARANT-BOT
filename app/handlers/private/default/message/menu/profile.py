@@ -4,7 +4,7 @@ from sqlalchemy import distinct
 from app import keyboards
 from app.data import text
 from app.data.text.ru.button.reply import profile
-from app.data.types.bargain_data import DealStatusType, DealRate
+from app.data.types.bargain_data import DealStatusType, FeedbackRate
 from app.loader import dp
 from app.utils.db_api import db
 from app.utils.db_api.models.deals import Deal
@@ -23,11 +23,11 @@ async def send_profile(message: Message, user: User, lang_code):
         Deal.seller_user_id == user.id).gino.all()
 
     feedback_count = await db.select([db.func.count(Feedback.rate)]). \
-        where(Feedback.rate != DealRate.NONE). \
+        where(Feedback.rate != FeedbackRate.NONE). \
         where(Feedback.receiver_user_id == user.id).gino.scalar() or 0
 
     total_rate = await db.select([db.func.sum(Feedback.rate)]). \
-        where(Feedback.rate != DealRate.NONE). \
+        where(Feedback.rate != FeedbackRate.NONE). \
         where(Feedback.receiver_user_id == user.id).gino.scalar() or 0
 
     view_count = await db.select([db.func.count(distinct(UserView.viewer_user_id))]).where(

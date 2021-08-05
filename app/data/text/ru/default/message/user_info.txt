@@ -1,6 +1,10 @@
-Информация о пользователе
-
-<b>ID:</b> {user_id}
-<b>Имя:</b> {user_fullname}
-<b>Username:</b> {user_username}
-<a href="{user_url_to_telegram}"><b>Ссылка на пользователя</b></a>
+👤 <u><b>Информация о пользователе</b></u>
+├ <b>Оценка:</b> {rate_star}
+├ <b>Дата регистрации:</b> {user_datetime_register}
+├ <b>ID:</b> {user_id} {user_prefix}
+├ <b>Username:</b> {user_username}
+├ <b>Просмотров профиля:</b> {user_views}👁‍🗨
+└ <b>🤝Сделок:</b> {count_all_bargains}
+     ├ <b>Продаж:</b> {count_sale_bargains}
+     └ <b>Покупок:</b> {count_buy_bargains}
+<b><u><a href='tg://user?id={user_id}'>Открыть профиль</a></u></b>

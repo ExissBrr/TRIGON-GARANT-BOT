@@ -4,7 +4,7 @@ class DealStatusType:
     CONTROVERSY: str = "controversy"
 
 
-class DealRate:
+class FeedbackRate:
     NONE = 0
 
 
