@@ -6,6 +6,7 @@ from app.data import text
 from app.data.text.ru.button.reply import profile
 from app.data.types.bargain_data import DealStatusType, FeedbackRate
 from app.loader import dp
+from app.utils.bot.generate_links import make_start_link
 from app.utils.db_api import db
 from app.utils.db_api.models.deals import Deal
 from app.utils.db_api.models.feedback import Feedback
@@ -16,7 +17,7 @@ from app.utils.format_data.user import format_rate
 
 
 @dp.message_handler(reply_command=profile)
-async def send_profile(message: Message, user: User, lang_code):
+async def send_profile(message: Message, user: User, bot_data, lang_code):
     list_shopping = await Deal.query.where(Deal.status == DealStatusType.CLOSED).where(
         Deal.buyer_user_id == user.id).gino.all()
     list_sales = await Deal.query.where(Deal.status == DealStatusType.CLOSED).where(
@@ -47,7 +48,7 @@ async def send_profile(message: Message, user: User, lang_code):
     bot_data = await message.bot.get_me()
     feedbacks = await Feedback.query.where(Feedback.receiver_user_id == message.from_user.id).gino.all()
     if feedbacks:
-        link_feedback = f'<a href="t.me/{bot_data.username}?start=feedback_{user.id}">Ссылка на отзывы</a>'
+        link_feedback = make_start_link(bot_data.username, 'feedback', feedback_user_id=user.id)
 
     await message.answer_photo(
         photo=photo,

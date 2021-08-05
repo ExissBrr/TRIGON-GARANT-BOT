@@ -1,0 +1,6 @@
+{deal_rate}
+<a href="{buyer_link}"><b>Покупатель:</b></a> {buyer_username}.
+
+{deal_comment}
+
+<b>Отзыв оставлен:</b> {feedback_date}
