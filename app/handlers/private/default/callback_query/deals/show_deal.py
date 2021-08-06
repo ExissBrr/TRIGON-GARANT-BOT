@@ -1,11 +1,10 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
-from loguru import logger
 
 from app import keyboards
 from app.data import text
 from app.data.types.bargain_data import DealStatusType
-from app.keyboards.callback_data.deal import deal_cd, DealCommands
+from app.keyboards.callback_data.deal import deal_cd, DealCommands, DealAdminCommands
 from app.loader import dp
 from app.utils.db_api.models.deals import Deal
 from app.utils.db_api.models.user import User
@@ -57,3 +56,30 @@ async def show_sale_deals(call: CallbackQuery, state: FSMContext, callback_data:
         ),
         reply_markup=keyboard
     )
+
+
+@dp.callback_query_handler(deal_cd.filter(command=DealAdminCommands.SHOW_ADMIN_DEAL_DETAILS))
+async def send_deal_admin_details(call: CallbackQuery, callback_data: dict, lang_code, user):
+    deal_id = int(callback_data.get('deal_id'))
+    deal = await Deal.get(deal_id)
+    buyer = await User.get(deal.buyer_user_id)
+    seller = await User.get(deal.seller_user_id)
+    if deal.status == DealStatusType.CLOSED:
+        closed_date = timezone(deal.update_at, user.timezone).strftime('%Y-%m-%d %H:%M')
+    else:
+        closed_date = '-'
+    await call.message.edit_text(
+        text=text.message.menu.default.show_deal_closed_details.format(
+            deal_id=deal.id,
+            buyer_id=buyer.id,
+            buyer_username=format_username(buyer),
+            seller_id=seller.id,
+            seller_username=format_username(seller),
+            deal_amount=deal.amount,
+            deal_start=timezone(deal.create_at, user.timezone).strftime('%Y-%m-%d %H:%M'),
+            deal_end=closed_date
+        ),
+        reply_markup=keyboards.admin.inline.controversies_operations.make_keyboard_controversies_admin(deal_id,
+                                                                                                       lang_code)
+    )
+    await call.answer()

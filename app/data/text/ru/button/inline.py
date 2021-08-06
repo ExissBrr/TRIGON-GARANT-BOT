@@ -24,3 +24,17 @@ show_username = 'Отображать username'
 hide_username = 'Скрыть username'
 categories = 'Категории'
 request_seller_creation = 'Стать селлером'
+
+menu_statistic = "Общая статистика"
+menu_sending_messages = "Сделать рассылку сообщений"
+menu_controversy_deals = 'Спорные сделки'
+menu_settings_bot = 'Настройки гаранта'
+menu_scam_list = 'Жалобы пользователей'
+menu_add_scam = 'Добавить пользователя в скам-лист'
+menu_payments = 'Выплаты'
+menu_seller = 'Управление селлерами'
+menu_seller_requests = 'Рассмотреть заявки селлеров'
+
+on_sellers_side = 'Заверишть в пользу продавца'
+on_buyers_side = 'Завершить в польцу покупателя'
+percent_division = 'Разделить процентно'
