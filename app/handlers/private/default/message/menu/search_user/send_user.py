@@ -28,6 +28,9 @@ async def send_user_profile(message: Message, state: FSMContext, lang_code, user
 
     if userdata.isdigit():
         if user.id == int(userdata):
+            await message.answer(
+                text=text[lang_code].default.message.cant_search_yourself
+            )
             raise SkipHandler
         found_user = await User.query.where(User.qf(id=userdata)).gino.first()
     else:
