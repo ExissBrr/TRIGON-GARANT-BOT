@@ -80,7 +80,7 @@ async def send_user_profile(message: Message, state: FSMContext, lang_code, user
             user_datetime_register=timezone(found_user.create_at, user.timezone).strftime('%Y-%m-%d %H:%M'),
             user_id=found_user.id,
             user_prefix=found_user.prefix,
-            user_username=format_username(found_user.username),
+            user_username=format_username(found_user),
             user_views=view_count,
             count_all_bargains=count_all_bargains,
             count_sale_bargains=count_sale_bargains,

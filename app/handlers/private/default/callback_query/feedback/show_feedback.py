@@ -18,7 +18,7 @@ async def show_feedback(call: CallbackQuery, callback_data: dict,user, lang_code
         text=text[lang_code].default.message.feedback_text.format(
             deal_rate=format_rate(feedback.rate, 1),
             buyer_link=buyer.url_to_telegram,
-            buyer_username=format_username(buyer.username),
+            buyer_username=format_username(buyer),
             feedback_date=timezone(user.create_at, user.timezone).strftime('%Y-%m-%d %H:%M'),
             deal_comment=feedback.comment
         )

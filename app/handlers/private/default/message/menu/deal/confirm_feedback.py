@@ -32,8 +32,8 @@ async def create_feedback(message: Message, state: FSMContext, state_data: dict,
     await deal.update_data(feedback_id=feedback.id)
     await message.answer(
         text=text[lang_code].default.message.feedback_was_created.format(
-            buyer_username=format_username(buyer.username),
-            seller_username=format_username(seller.username),
+            buyer_username=format_username(buyer),
+            seller_username=format_username(seller),
             seller_link=seller.url_to_telegram,
             buyer_link=buyer.url_to_telegram,
             deal_id=deal.id,
@@ -42,8 +42,8 @@ async def create_feedback(message: Message, state: FSMContext, state_data: dict,
     )
     await message.answer(
         text=text[lang_code].default.message.feedback_was_created.format(
-            buyer_username=format_username(buyer.username),
-            seller_username=format_username(seller.username),
+            buyer_username=format_username(buyer),
+            seller_username=format_username(seller),
             seller_link=seller.url_to_telegram,
             buyer_link=buyer.url_to_telegram,
             deal_id=deal.id,

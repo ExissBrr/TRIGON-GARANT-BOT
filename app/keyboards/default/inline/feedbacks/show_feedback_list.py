@@ -11,7 +11,7 @@ async def make_keyboard_feedbacks_list(feedbacks):
         buyer = await User.get(int(feedback.commentator_user_id))
         markup.row(
             InlineKeyboardButton(
-                text=f'{format_username(buyer.username)}:\n {format_rate(feedback.rate, 1)}',
+                text=f'{format_username(buyer)}:\n {format_rate(feedback.rate, 1)}',
                 callback_data=feedback_cd.new(feedback_id=feedback.id, command=FeedbackCommands.SHOW_FEEDBACK)
             )
         )

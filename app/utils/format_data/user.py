@@ -1,13 +1,16 @@
 from typing import Union
 
+from app.data import text
 from app.data.types.bargain_data import FeedbackRate
 from app.data.types.lang import LangCode
 from app.utils.db_api.models.user import User
 
 
-def format_username(username: Union[str, User], default: str = 'Not username') -> str:
+def format_username(username: Union[str, User], default: str = 'Not username', lang_code='ru') -> str:
     """Форматирует username"""
     if isinstance(username, User):
+        if username.is_anonymous:
+            return text[lang_code].default.message.username_hidden
         username = username.username
 
     if str(username) == 'None':

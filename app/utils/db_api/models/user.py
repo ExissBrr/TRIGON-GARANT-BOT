@@ -31,6 +31,7 @@ class User(BaseModel):
     is_blocked: bool = Column(Boolean, default=False)
     is_active: bool = Column(Boolean, default=True)
     reason_for_blocking: str = Column(String(255))
+    is_anonymous: bool = Column(Boolean, default=False)
 
     captcha_text: str = Column(String(8), default=UserCaptchaText.NONE)
 

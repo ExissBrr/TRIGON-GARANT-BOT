@@ -20,7 +20,7 @@ async def upload_user_data(call: CallbackQuery, user: User, lang_code):
     user_data_file = ExcelFile()
     user_data_file.write_data(
         id=user.id,
-        username=format_username(user.username),
+        username=format_username(user),
         fullname=user.fullname,
         language=format_lang_code(user.lang_code),
         deep_link=user.deep_link,

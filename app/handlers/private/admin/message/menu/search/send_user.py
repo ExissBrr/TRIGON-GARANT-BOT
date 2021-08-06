@@ -40,7 +40,7 @@ async def send_user_info(message: Message, lang_code):
         caption=text[lang_code].admin.message.user_info.format(
             user_id=user.id,
             user_fullname=format_fullname(user.fullname),
-            user_username=format_username(user.username),
+            user_username=format_username(user),
             user_url_to_telegram=user.url_to_telegram,
         )
     )

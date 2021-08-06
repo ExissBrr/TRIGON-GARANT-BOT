@@ -34,7 +34,7 @@ async def create_new_deal(message: Message, state: FSMContext, state_data: dict,
             deal_id=deal.id,
             deal_amount=deal_amount,
             user_id=seller.id,
-            user_username=format_username(seller.username),
+            user_username=format_username(seller),
         )
     )
 

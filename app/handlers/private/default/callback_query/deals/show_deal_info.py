@@ -34,11 +34,11 @@ async def show_info(call: CallbackQuery, callback_data: dict, lang_code, user):
         text=text[lang_code].default.message.deal_info.format(
             deal_id=deal.id,
             buyer_id=buyer.id,
-            buyer_username=format_username(buyer.username),
+            buyer_username=format_username(buyer),
             buyer_link=buyer.url_to_telegram,
             seller_id=seller.id,
             seller_link=seller.url_to_telegram,
-            seller_username=format_username(seller.username),
+            seller_username=format_username(seller),
             deal_amount=deal.amount,
             deal_start=timezone(deal.create_at, user.timezone).strftime('%Y-%m-%d %H:%M'),
             deal_closed=closed_date

@@ -37,7 +37,7 @@ async def request_bargain_category(message: Message, state: FSMContext, state_da
             bargin_amount=deal_amount,
             user_fullname=quote_html(seller.fullname),
             user_id=seller.id,
-            user_username=format_username(seller.username)
+            user_username=format_username(seller)
         ),
         reply_markup=keyboards.default.reply.confirm_cancel.keyboard(lang_code)
     )
