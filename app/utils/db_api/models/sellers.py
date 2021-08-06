@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, String, Sequence, ForeignKey
+from sqlalchemy import Column, BigInteger, String, Sequence
 
 from app.data.types.seller_data import SellerStatus
 from app.utils.db_api.db import BaseModel
@@ -10,7 +10,7 @@ class Seller(BaseModel):
     user_id: int = Column(BigInteger)
     status: str = Column(String, default=SellerStatus.APPROVAL)
     description: str = Column(String(400), default='-')
-    category_id: int = Column(ForeignKey('service_categories.id'))
+    category: str = Column(String(200))
 
     async def update_status(self, new_status):
         await self.update_data(status=new_status)

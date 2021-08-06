@@ -6,3 +6,4 @@ from . import user_search
 from . import menu
 from . import deals
 from . import feedbacks
+from . import sellers
