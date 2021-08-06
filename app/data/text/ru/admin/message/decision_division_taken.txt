@@ -1,0 +1,3 @@
+<b>Решение по сделке №{deal_id} принято</b>.
+Продавцу {seller_username} было возвращено {seller_amount} ₽
+Покупателю {buyer_username} было возвращено {buyer_amount} ₽

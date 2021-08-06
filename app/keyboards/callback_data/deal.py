@@ -2,9 +2,9 @@ from aiogram.utils.callback_data import CallbackData
 
 
 class UserDealCommands:
-    SHOW_SHOPPING_LIST = '0'
-    SHOW_SELLING_LIST = '1'
-    SHOW_CONTROVERSY_LIST = '2'
+    SHOW_SHOPPING_LIST = '00'
+    SHOW_SELLING_LIST = '10'
+    SHOW_CONTROVERSY_LIST = '20'
 
 
 class DealCommands:
@@ -17,10 +17,10 @@ class DealCommands:
 
 
 class DealAdminCommands:
-    ON_SELLERS_SIDE = '0'
-    ON_BUYERS_SIDE = '1'
-    PERCENT_DIVISION = '2'
-    SHOW_ADMIN_DEAL_DETAILS = '3'
+    ON_SELLERS_SIDE = '6'
+    ON_BUYERS_SIDE = '7'
+    PERCENT_DIVISION = '8'
+    SHOW_ADMIN_DEAL_DETAILS = '9'
 
 
 user_deal_cd = CallbackData('user_deal', 'user_id', 'command')

@@ -1,0 +1,1 @@
+Отдать покупателю {buyer_username} {buyer_share}% и продавцу {seller_username} {seller_share}% ?

@@ -1,0 +1,3 @@
+<b>Решение по сделке №{deal_id} принято</b>.
+Спор пользователей <a href="{user1_link}">{user1_username}</a> и <a href="{user2_link}">{user2_username}</a>
+<b>Закрыт в пользу</b> <a href="{winner_link}">{winner_username}</a>

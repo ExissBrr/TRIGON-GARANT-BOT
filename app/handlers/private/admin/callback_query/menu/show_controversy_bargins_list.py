@@ -1,5 +1,6 @@
 from aiogram.types import CallbackQuery
 
+from app import keyboards
 from app.data import text
 from app.data.types.bargain_data import DealStatusType
 from app.data.types.user_data import UserRole
@@ -17,9 +18,9 @@ async def show_controversy_list(call: CallbackQuery, lang_code):
     if controversies:
         await call.message.answer(
             text=text[lang_code].admin.message.controversies_for_now,
-            reply_markup=await inline.admin.controversies_list.make_keyboard_controversies_list(bargins)
+            reply_markup=await keyboards.admin.inline.controversies_list.make_keyboard_controversies_list(controversies)
         )
     else:
         await call.message.answer(
-            text='Спорных сделок нет.'
+            text=text[lang_code].default.message.none_controversies
         )
