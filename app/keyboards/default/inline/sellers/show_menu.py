@@ -9,7 +9,7 @@ def make_keyboard_seller_requests(lang_code):
     markup.add(
         InlineKeyboardButton(
             text=text[lang_code].button.inline.categories,
-            switch_inline_query_current_chat='выберите категорию..'
+            switch_inline_query_current_chat=text[lang_code].default.call.choose_category
         ),
         InlineKeyboardButton(
             text=text[lang_code].button.inline.request_seller_creation,

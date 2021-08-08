@@ -38,7 +38,7 @@ async def show_seller_stat(call: CallbackQuery, callback_data: dict, lang_code):
         where(Feedback.rate != FeedbackRate.NONE). \
         where(Feedback.receiver_user_id == user_seller.id).gino.scalar() or 0
     await call.message.answer(
-        text=text.message.menu.default.show_seller_info.format(
+        text=text[lang_code].admin.message.show_seller_info.format(
             seller_username=format_username(user_seller),
             seller_id=seller.id,
             count_closed_successfully=await Deal.query.where(Deal.seller_user_id == user_seller.id).where(

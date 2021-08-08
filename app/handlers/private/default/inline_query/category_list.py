@@ -1,4 +1,5 @@
 from aiogram.types import InlineQuery, InlineQueryResultArticle, InputMessageContent
+from loguru import logger
 
 from app.data import text
 from app.data.types.category_data import ServiceCategoryType
@@ -12,15 +13,13 @@ from app.utils.db_api.models.sellers import Seller
 async def send_results(query: InlineQuery, lang_code):
     results = []
     counter = 1
+
     for category_name, category in ServiceCategoryType.__dict__.items():
         if category_name in ['__dict__', '__weakref__', '__doc__', '__module__']:
             continue
         if not await Seller.query.where(Seller.status == SellerStatus.ACTIVE).where(
                 Seller.category == category).gino.all():
-            return await query.answer(
-                [], cache_time=10, is_personal=True, switch_pm_parameter='easter_egg',
-                switch_pm_text=text[lang_code].default.call.nothing
-            )
+            continue
         results.append(
             InlineQueryResultArticle(
                 id=str(counter),
