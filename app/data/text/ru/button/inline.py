@@ -36,6 +36,8 @@ menu_payments = 'Выплаты'
 menu_seller = 'Управление селлерами'
 menu_seller_requests = 'Рассмотреть заявки селлеров'
 seller_search = 'Поиск селлера'
+hide_seller = 'Скрыть селлера'
+reveal_seller = 'Отображать селлера'
 
 on_sellers_side = 'Заверишть в пользу продавца'
 on_buyers_side = 'Завершить в польцу покупателя'

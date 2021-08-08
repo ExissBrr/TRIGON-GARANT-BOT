@@ -6,6 +6,7 @@
 <b>Ссылка на отзывы:</b> {user_link_feedback}
 
 <b><u><a href='tg://user?id={user_id}'>Открыть профиль</a></u></b>
+<b>Статус селлера: <u>{seller_status}</u></b>
 
 Сервисная информация:
 <b>Id селлера:</b> <code>{seller_id}</code>
