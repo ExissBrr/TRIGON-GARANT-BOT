@@ -32,9 +32,14 @@ menu_settings_bot = 'Настройки гаранта'
 menu_scam_list = 'Жалобы пользователей'
 menu_add_scam = 'Добавить пользователя в скам-лист'
 menu_payments = 'Выплаты'
+
 menu_seller = 'Управление селлерами'
 menu_seller_requests = 'Рассмотреть заявки селлеров'
+seller_search = 'Поиск селлера'
 
 on_sellers_side = 'Заверишть в пользу продавца'
 on_buyers_side = 'Завершить в польцу покупателя'
 percent_division = 'Разделить процентно'
+
+approve_seller = 'Подтвердить заявку'
+decline_seller = 'Отклонить заявку'

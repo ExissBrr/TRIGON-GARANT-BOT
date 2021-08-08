@@ -7,7 +7,7 @@ class AdminMenuChoice:
     SHOW_BOT_SETTINGS = '2'
     ADD_SCAMMER = '3'
     SHOW_SCAM_LIST = '4'
-    SHOW_CONTROVERSY_BARGINS = '5'
+    SHOW_CONTROVERSY_DEALS = '5'
     PAYMENTS = '6'
     SHOW_SELLER_MENU = '7'
 

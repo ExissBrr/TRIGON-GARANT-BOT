@@ -18,7 +18,7 @@ async def show_feedback(call: CallbackQuery, callback_data: dict, user, lang_cod
         Feedback.receiver_user_id == seller.id).gino.all()
     if not feedbacks:
         return await call.message.answer(
-            text=text[lang_code].default.message.wrong_data
+            text=text[lang_code].default.message.not_feedbacks
         )
 
     await call.message.answer(

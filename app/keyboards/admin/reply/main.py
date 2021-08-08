@@ -13,7 +13,15 @@ def keyboard(lang_code) -> ReplyKeyboardMarkup:
             ],
             [
                 KeyboardButton(text[lang_code].button.reply.profile)
-            ]
+            ],
+            [
+                KeyboardButton(
+                    text=text[lang_code].button.reply.show_menu_sellers
+                ),
+                KeyboardButton(
+                    text=text[lang_code].button.reply.search_scam
+                )
+            ],
         ]
     )
     return markup

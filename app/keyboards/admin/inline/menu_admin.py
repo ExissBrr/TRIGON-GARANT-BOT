@@ -29,7 +29,7 @@ def make_keyboard_admin_menu(lang_code):
         ),
         InlineKeyboardButton(
             text=text[lang_code].button.inline.menu_controversy_deals,
-            callback_data=admin_menu_cd.new(command=AdminMenuChoice.SHOW_CONTROVERSY_BARGINS)
+            callback_data=admin_menu_cd.new(command=AdminMenuChoice.SHOW_CONTROVERSY_DEALS)
         ),
         InlineKeyboardButton(
             text=text[lang_code].button.inline.menu_payments,

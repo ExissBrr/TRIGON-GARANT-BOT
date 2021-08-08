@@ -10,10 +10,10 @@ from app.utils.format_data.user import format_rate, format_username
 
 
 @dp.callback_query_handler(feedback_cd.filter(command=FeedbackCommands.SHOW_FEEDBACK))
-async def show_feedback(call: CallbackQuery, callback_data: dict,user, lang_code):
+async def show_feedback(call: CallbackQuery, callback_data: dict, user, lang_code):
     await call.answer(text='One moment..', cache_time=5)
     feedback = await Feedback.get(int(callback_data.get('feedback_id')))
-    buyer:User = await User.get(int(feedback.commentator_user_id))
+    buyer: User = await User.get(int(feedback.commentator_user_id))
     await call.message.answer(
         text=text[lang_code].default.message.feedback_text.format(
             deal_rate=format_rate(feedback.rate, 1),

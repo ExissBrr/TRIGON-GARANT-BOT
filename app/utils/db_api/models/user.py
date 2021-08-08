@@ -26,6 +26,7 @@ class User(BaseModel):
 
     username_history: str = Column(String, default=UserDataHistory.NONE)
     fullname_history: str = Column(String, default=UserDataHistory.NONE)
+    link_feedback: str = Column(String(400), default='')
 
     is_read_rules: bool = Column(Boolean, default=False)
     is_blocked: bool = Column(Boolean, default=False)

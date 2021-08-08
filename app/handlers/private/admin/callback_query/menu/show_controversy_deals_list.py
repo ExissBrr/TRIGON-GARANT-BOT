@@ -11,7 +11,7 @@ from app.utils.db_api.models.deals import Deal
 
 
 @dp.callback_query_handler(UserRoleFilter(UserRole.ADMIN),
-                           admin_menu_cd.filter(command=AdminMenuChoice.SHOW_CONTROVERSY_BARGINS))
+                           admin_menu_cd.filter(command=AdminMenuChoice.SHOW_CONTROVERSY_DEALS))
 async def show_controversy_list(call: CallbackQuery, lang_code):
     await call.answer(cache_time=5)
     controversies = await Deal.query.where(Deal.status == DealStatusType.CONTROVERSY).gino.all()
