@@ -7,3 +7,4 @@ from . import menu
 from . import deals
 from . import feedbacks
 from . import sellers
+from . import balance

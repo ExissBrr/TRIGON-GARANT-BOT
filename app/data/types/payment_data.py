@@ -9,3 +9,14 @@ class PaymentSystemStatus:
 
 class PaymentTransactionId:
     NONE = 'none'
+
+
+class PaymentType:
+    IN = 'in'
+    OUT = 'out'
+
+
+class PaymentStatus:
+    SUCCESS = 'success'
+    FAILED = 'failed'
+    PENDING = 'pending'

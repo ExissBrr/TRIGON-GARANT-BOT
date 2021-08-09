@@ -1,0 +1,1 @@
+<a href="{easter_egg_payment_system}">💳</a>Выберите платежную систему

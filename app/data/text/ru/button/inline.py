@@ -25,6 +25,9 @@ hide_username = 'Скрыть username'
 categories = 'Категории'
 request_seller_creation = 'Стать селлером'
 
+payment_system_qiwi = '🥝Qiwi'
+proceed_to_checkout = '💳Перейти к оплате'
+
 menu_statistic = "Общая статистика"
 menu_sending_messages = "Сделать рассылку сообщений"
 menu_controversy_deals = 'Спорные сделки'
