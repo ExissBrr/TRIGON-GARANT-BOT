@@ -2,7 +2,7 @@ from aiogram.types import CallbackQuery
 
 from app import keyboards
 from app.data import text
-from app.data.types.bargain_data import DealStatusType
+from app.data.types.deal_data import DealStatusType
 from app.keyboards.callback_data.deal import deal_cd, DealCommands
 from app.loader import dp, config
 from app.utils.db_api.models.deals import Deal

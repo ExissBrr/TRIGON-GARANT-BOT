@@ -3,7 +3,7 @@ from aiogram.types import Message
 
 from app.data import text
 from app.data.text.ru.button.reply import confirm
-from app.data.types.bargain_data import DealStatusType
+from app.data.types.deal_data import DealStatusType
 from app.loader import dp
 from app.states.private.percent_controversy_division import StateDivideAmount
 from app.utils.bot import send_main_keyboard

@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from app.data import text
-from app.data.types.bargain_data import DealStatusType
+from app.data.types.deal_data import DealStatusType
 from app.keyboards.callback_data.deal import user_deal_cd, UserDealCommands
 from app.utils.db_api import db
 from app.utils.db_api.models.deals import Deal

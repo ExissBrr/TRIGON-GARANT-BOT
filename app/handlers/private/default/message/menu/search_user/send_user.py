@@ -5,7 +5,7 @@ from sqlalchemy import distinct
 
 from app import keyboards
 from app.data import text
-from app.data.types.bargain_data import FeedbackRate
+from app.data.types.deal_data import FeedbackRate
 from app.loader import dp
 from app.loader import links
 from app.states.private.search import UserSearchStates

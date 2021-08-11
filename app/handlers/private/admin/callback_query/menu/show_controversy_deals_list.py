@@ -2,7 +2,7 @@ from aiogram.types import CallbackQuery
 
 from app import keyboards
 from app.data import text
-from app.data.types.bargain_data import DealStatusType
+from app.data.types.deal_data import DealStatusType
 from app.data.types.user_data import UserRole
 from app.filters import UserRoleFilter
 from app.keyboards.callback_data.admin import admin_menu_cd, AdminMenuChoice

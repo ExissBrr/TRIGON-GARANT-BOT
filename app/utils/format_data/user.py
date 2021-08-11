@@ -1,7 +1,7 @@
 from typing import Union
 
 from app.data import text
-from app.data.types.bargain_data import FeedbackRate
+from app.data.types.deal_data import FeedbackRate
 from app.data.types.lang import LangCode
 from app.utils.db_api.models.user import User
 

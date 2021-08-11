@@ -3,7 +3,7 @@ from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import quote_html
 
 from app.data import text
-from app.data.types.bargain_data import DealStatusType
+from app.data.types.deal_data import DealStatusType
 from app.keyboards.callback_data.deal import DealAdminCommands, deal_cd
 from app.loader import dp, config
 from app.states.private.percent_controversy_division import StateDivideAmount

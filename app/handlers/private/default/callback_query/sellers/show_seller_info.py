@@ -1,7 +1,7 @@
 from aiogram.types import CallbackQuery
 
 from app.data import text
-from app.data.types.bargain_data import DealStatusType, FeedbackRate
+from app.data.types.deal_data import DealStatusType, FeedbackRate
 from app.keyboards.callback_data.sellers import CommandsSellers, sellers_cd
 from app.loader import dp
 from app.utils.bot.generate_links import make_start_link

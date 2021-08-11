@@ -3,7 +3,7 @@ from aiogram.types import Message
 
 from app import keyboards
 from app.data import text
-from app.data.types.bargain_data import FeedbackRate, DealStatusType
+from app.data.types.deal_data import FeedbackRate, DealStatusType
 from app.data.types.feedback_data import FeedbackStatus
 from app.loader import dp
 from app.states.private.search_seller import SellerSearch

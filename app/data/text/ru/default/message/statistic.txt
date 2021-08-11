@@ -1,0 +1,22 @@
+<b><u>Статистика по пользователям</u></b>
+<b>Всего пользователей:</b> {count_users_in_db}
+<b>Активных пользователей:</b> {count_active_users}
+<b>Заблокировано:</b>  {count_users_blocked}
+<b>Подключено к реф.программе:</b> {count_users_referred}
+<b>Общий баланс пользователей:</b> {amount_balance_all_users}₽
+
+<b><u>Статистика платежей</u></b>
+<b>Пополнений</b>: {count_payment_in}
+<b>Выводов</b>: {count_payment_out}
+<b>Сумма пополнений</b>: {amount_payment_in}₽
+<b>Сумма выводов</b>: {amount_payment_out}₽
+
+<b><u>Статистика сделок</u></b>
+<b>Всего сделок</b>: {count_deals}
+<b>Активных сделок</b>: {count_active_deals}
+<b>Общая сумма сделок</b>: {amount_all_deals}₽
+<b>Сумма закрытых сделок</b>: {amount_closed_deals}
+<b>Сумма спорных сделок</b>: {amount_controversy_deals}
+<b>Сумма активных сделок</b>: {amount_active_deals}₽
+<b>Ожидаемая выручка</b>: ±{amount_abt_succor}₽
+

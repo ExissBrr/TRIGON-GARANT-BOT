@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from app.data.types.bargain_data import FeedbackRate
+from app.data.types.deal_data import FeedbackRate
 from app.keyboards.callback_data.sellers import sellers_cd, CommandsSellers
 from app.utils.db_api import db
 from app.utils.db_api.models.feedback import Feedback

@@ -4,7 +4,7 @@ from sqlalchemy import distinct
 from app import keyboards
 from app.data import text
 from app.data.text.ru.button.reply import profile
-from app.data.types.bargain_data import DealStatusType, FeedbackRate
+from app.data.types.deal_data import DealStatusType, FeedbackRate
 from app.loader import dp
 from app.utils.bot.generate_links import make_start_link
 from app.utils.db_api import db
