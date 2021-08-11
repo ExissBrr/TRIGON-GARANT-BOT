@@ -19,3 +19,7 @@ class UserDataHistory:
 
 class UserCaptchaText:
     NONE = ''
+
+
+class UserRequisites:
+    NONE = ''

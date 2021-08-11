@@ -13,3 +13,4 @@ from . import skip_and_roles
 from . import proceed_and_roles
 from . import rates
 from . import sellers
+from . import requisites_list

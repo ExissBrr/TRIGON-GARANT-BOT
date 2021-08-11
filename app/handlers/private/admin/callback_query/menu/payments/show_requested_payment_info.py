@@ -1,34 +1,36 @@
 from aiogram.types import CallbackQuery
 
-from data import text
-from keyboards import inline
-from keyboards.callback_data.default.transaction import transaction_cd, TransactionCommands
-from loader import dp
-from utils.database_api.table_models.qiwi_transaction import DBCommandsQiwiTransaction
+from app import keyboards
+from app.data import text
+from app.data.types.payment_data import PaymentStatus, PaymentType
+from app.keyboards.callback_data.transaction import transaction_cd, TransactionCommands
+from app.loader import dp
+from app.utils.db_api.models.payments import Payment
+from app.utils.db_api.models.user import User
 
 
 @dp.callback_query_handler(transaction_cd.filter(command=TransactionCommands.SHOW_PAYMENT_INFO))
-async def show_info(call: CallbackQuery, callback_data: dict):
+async def show_info(call: CallbackQuery, callback_data: dict, lang_code):
     await call.answer(cache_time=5)
     payment_comment = callback_data.get('comment')
-    if not await DBCommandsQiwiTransaction.is_transaction(comment=payment_comment):
+    payment = await Payment.query. \
+        where(Payment.comment == payment_comment). \
+        where(Payment.status == PaymentStatus.PENDING). \
+        where(Payment.type == PaymentType.OUT).gino.first()
+    if not payment:
         await call.message.answer(
-            text='Заявка уже обработана'
+            text=text[lang_code].default.call.payment_request_already_processed
         )
         return False
-    payment = await DBCommandsQiwiTransaction.get_transaction(comment=payment_comment)
-    if not payment.is_hold:
-        await call.message.answer(
-            text='Заявка уже обработана'
-        )
-        return False
+    payer_user: User = await User.get(int(payment.payer_user_id))
     await call.message.answer(
-        text=text.message.menu.admin.info_payment.format(
-            details=payment.user_wallet_account,
+        text=text[lang_code].admin.message.payment_info.format(
+            details=payment.account_in,
             amount=payment.amount,
-            commission_amount=payment.commission,
-            total_amount=payment.amount - payment.commission,
-            user_id=payment.user_id
+            commission_amount=payment.commission_amount,
+            total_amount=payment.amount - payment.commission_amount,
+            user_link=payer_user.url_to_telegram,
         ),
-        reply_markup=inline.admin.payments.make_decision.make_keyboard_payment_decision(comment=payment_comment)
+        reply_markup=keyboards.admin.inline.payments.make_decision.make_keyboard_payment_decision(payment_comment,
+                                                                                                  lang_code)
     )

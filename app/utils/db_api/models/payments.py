@@ -14,6 +14,6 @@ class Payment(BaseModel):
     commission_amount: float = Column(Float(precision=1, asdecimal=True, decimal_return_scale=True))
     amount: float = Column(Float(precision=1, asdecimal=True, decimal_return_scale=True))
     payer_user_id: int = Column(ForeignKey('users.id'))
-    system_id: int = Column(ForeignKey('payment_systems.id'))
+    system: int = Column(String)
     account_from: str = Column(String(30))
     account_in: str = Column(String(30))

@@ -1,0 +1,7 @@
+💳<b>Заявка на вывод создана!</b>
+├ <b>ID:</b> <code>{payment_id}</code>
+├ <b>Дата заявки:</b> {payment_create_at}
+├ <b>Ваш ID:</b> <code>{user_id}</code>
+├ <b>Платежная система:</b> {payment_system}
+├ <b>Реквизиты:</b> <code>{requisite_data}</code>
+└ <b>Сумма:</b> {total_amount}
