@@ -36,6 +36,7 @@ class ConfigLoader:
             admin_id=int(self._config['BotConfig']['admin_id']),
             chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
             main_chats_id=[int(chat_id) for chat_id in self._config['BotConfig']['main_chats_id'].split()],
+            chat_id_service=int(self._config['BotConfig']['chat_id_service']),
             commands=self.get_bot_commands
         )
         return bot_config
@@ -58,7 +59,7 @@ class ConfigLoader:
         db_pass = self._config['DatabaseConfig']['db_pass']
         database_config = DatabaseConfig(
             host=host,
-            port=port,
+            port=int(port),
             db=db,
             db_user=db_user,
             db_pass=db_pass,

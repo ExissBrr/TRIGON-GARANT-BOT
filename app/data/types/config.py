@@ -10,6 +10,7 @@ class BotConfig:
     admin_id: int
     main_chats_id: List[int]
     chats_id: List[int]
+    chat_id_service: int
     commands: dict
     is_active: bool = True
 
@@ -22,6 +23,7 @@ class DatabaseConfig:
     db_user: str
     db_pass: str
     url: str
+
 
 @dataclass
 class ImgbbConfig:

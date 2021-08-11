@@ -5,4 +5,5 @@ ID Сделки: {deal_id}.
 🛍<a href='{buyer_link}'>Покупатель</a>: {buyer_username}
 
 💬<b>Отзыв.</b>
+{feedback_rate}
 <u>{feedback_text}</u>

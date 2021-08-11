@@ -1,0 +1,3 @@
+<b>Удачная сделка!</b>
+Отлично, сделка <b><a href='tg://user?id={seller_id}'>{seller_id}</a></b> и <b><a href='tg://user?id={buyer_id}'>{buyer_id}</a></b>
+на сумму <b>{deal_amount}₽</b> была успешно завершена!

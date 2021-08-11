@@ -3,13 +3,13 @@ from aiogram.types import Message
 
 from app.data import text
 from app.data.text.ru import button
-from app.loader import dp
+from app.loader import dp, config
 from app.states.private.left_feedback import FeedbackForSeller
 from app.utils.bot import send_main_keyboard
 from app.utils.db_api.models.deals import Deal
 from app.utils.db_api.models.feedback import Feedback
 from app.utils.db_api.models.user import User
-from app.utils.format_data.user import format_username
+from app.utils.format_data.user import format_username, format_rate
 
 
 @dp.message_handler(state=FeedbackForSeller.approve_feedback, reply_command=button.reply.confirm)
@@ -30,6 +30,7 @@ async def create_feedback(message: Message, state: FSMContext, state_data: dict,
     )
 
     await deal.update_data(feedback_id=feedback.id)
+
     await message.answer(
         text=text[lang_code].default.message.feedback_was_created.format(
             buyer_username=format_username(buyer),
@@ -37,16 +38,19 @@ async def create_feedback(message: Message, state: FSMContext, state_data: dict,
             seller_link=seller.url_to_telegram,
             buyer_link=buyer.url_to_telegram,
             deal_id=deal.id,
+            feedback_rate=format_rate(feedback.rate,1),
             feedback_text=feedback.comment
         )
     )
-    await message.answer(
+    await message.bot.send_message(
+        chat_id=config.bot.chat_id_service,
         text=text[lang_code].default.message.feedback_was_created.format(
             buyer_username=format_username(buyer),
             seller_username=format_username(seller),
             seller_link=seller.url_to_telegram,
             buyer_link=buyer.url_to_telegram,
             deal_id=deal.id,
+            feedback_rate=format_rate(feedback.rate,1),
             feedback_text=feedback.comment
         )
     )

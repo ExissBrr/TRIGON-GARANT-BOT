@@ -47,7 +47,7 @@ async def create_new_deal(message: Message, state: FSMContext, state_data: dict,
         )
     )
     await message.bot.send_message(
-        chat_id=user.id,
+        chat_id=config.bot.chat_id_service,
         text=text[lang_code].default.message.deal_was_created_chat_info.format(
             deal_id=deal.id,
             seller_link_to_telegram=seller.url_to_telegram,

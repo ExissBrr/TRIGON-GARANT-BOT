@@ -1,0 +1,3 @@
+<b>Отмена сделки</b>
+Сделка  между пользователями <b><a href="{seller_link}">{seller_id}</a></b> и <b><a href="{buyer_link}">{buyer_id}</a></b>
+на сумму <b>{deal_amount}₽</b> провалилась.

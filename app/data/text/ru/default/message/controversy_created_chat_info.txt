@@ -1,0 +1,2 @@
+<b><u>Спорная сделка</u></b>
+Пользователь <a href="{user_caller_link}">{user_caller_id}</a> начал спор с пользователем <a href="{user_expectant_link}">{user_expectant_id}</a>.
