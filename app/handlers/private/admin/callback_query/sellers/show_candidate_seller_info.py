@@ -36,7 +36,7 @@ async def show_info(call: CallbackQuery, callback_data: dict, lang_code):
     if feedback_count >= 1:
         link_feedback = make_start_link(bot_data.username, 'feedback', feedback_user_id=user.id)
     await call.message.answer(
-        text=text[lang_code].admin.message.show_seller_info.format(
+        text=text[lang_code].default.message.show_seller_info.format(
             seller_username=format_username(user),
             seller_id=seller.id,
             count_closed_successfully=deal_count,
