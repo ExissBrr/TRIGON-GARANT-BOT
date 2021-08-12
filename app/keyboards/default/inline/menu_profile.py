@@ -28,6 +28,10 @@ def keyboard(lang_code):
                 InlineKeyboardButton(
                     text=text[lang_code].button.inline.requisites,
                     callback_data=menu_profile_cd.new(command=MenuProfileCD.menu_requisites)
+                ),
+                InlineKeyboardButton(
+                    text=text[lang_code].button.inline.about_referral_system,
+                    callback_data=menu_profile_cd.new(command=MenuProfileCD.show_referral_menu)
                 )
             ]
         ]

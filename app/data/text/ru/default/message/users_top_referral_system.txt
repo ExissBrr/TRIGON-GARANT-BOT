@@ -1,0 +1,2 @@
+Топ {count_users_top} рефералов 🔥
+{user_referral_system_data}

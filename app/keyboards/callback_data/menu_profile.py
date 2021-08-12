@@ -7,6 +7,8 @@ class MenuProfileCD:
     show_menu_deals = '2'
     menu_requisites = '3'
     show_feedbacks = '4'
+    show_referral_menu = '5'
+    show_top_referral = '6'
 
 
 menu_profile_cd = CallbackData('menu_profile', 'command')
