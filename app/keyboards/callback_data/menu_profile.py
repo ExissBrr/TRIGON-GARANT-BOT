@@ -9,6 +9,7 @@ class MenuProfileCD:
     show_feedbacks = '4'
     show_referral_menu = '5'
     show_top_referral = '6'
+    change_requisites = '7'
 
 
 menu_profile_cd = CallbackData('menu_profile', 'command')

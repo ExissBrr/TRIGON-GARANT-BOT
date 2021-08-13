@@ -8,3 +8,4 @@ from . import deals
 from . import feedbacks
 from . import sellers
 from . import balance
+from . import requisites

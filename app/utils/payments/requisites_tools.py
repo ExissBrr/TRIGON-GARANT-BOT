@@ -12,3 +12,13 @@ def is_valid_card(code: str):
 def is_valid_phone(phone: str):
     phone = format_phone(phone)
     return len(phone) == 11
+
+
+def is_valid_details(detail: str):
+    detail = detail.replace(' ', '')
+    if len(detail) == 16 and is_valid_card(detail):
+        return True
+    if '+7' in detail or '+38' in detail:
+        return True
+
+    return False
