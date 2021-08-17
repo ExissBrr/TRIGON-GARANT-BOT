@@ -20,6 +20,7 @@ async def wait_for_chat_id(message: Message, state: FSMContext, state_data, lang
     else:
         chats_id += f' {chat_id}'
     chats = [await message.bot.get_chat(chat_id) for chat_id in config.bot.chats_id]
+    chats += [await message.bot.get_chat(chat_id) for chat_id in config.bot.main_chats_id]
 
     if not chats_id and not selected_roles:
         keyboard = keyboards.default.reply.skip_and_chats.keyboard(chats, lang_code)

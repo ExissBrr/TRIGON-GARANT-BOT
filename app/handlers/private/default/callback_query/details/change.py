@@ -15,14 +15,15 @@ async def change_details(message: Message, state: FSMContext, user: User):
     details_list = details_data.split()
     for detail in details_list:
         if detail in user.requisites.split():
-            await user.remove_detail(detail)
+            new_details = user.requisites.replace(detail, '')
+            await user.update_data(requisites=new_details)
             await message.answer(f'Реквизит {detail} удален')
         elif is_valid_details(detail):
-            details=user.requisites.split()
+            details = user.requisites.split()
             details.append(detail)
             new_details = list(set(details))
             await user.update_data(requisites=' '.join(new_details))
             await message.answer(f'Реквизит {detail} сохранен')
         else:
             await message.answer(f'Реквизит {detail} неверного формата')
-    await send_main_keyboard(user,state)
+    await send_main_keyboard(user, state)

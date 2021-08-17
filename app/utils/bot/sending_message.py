@@ -29,7 +29,8 @@ async def text_message(text: str,
     """
     bot = Bot.get_current()
     list_not_success = []
-
+    logger.debug(roles)
+    logger.debug(chats_id)
     if chats_id is None:
         chats_id = []
     elif isinstance(chats_id, int):
@@ -47,6 +48,7 @@ async def text_message(text: str,
 
     chats_id.extend([user.id for user in users])
 
+    logger.debug(chats_id)
     for chat_id in set(chats_id):
         try:
             if content_type == ContentType.TEXT:

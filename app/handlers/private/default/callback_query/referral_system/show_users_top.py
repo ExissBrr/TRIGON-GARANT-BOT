@@ -19,7 +19,7 @@ async def show_menu(call: CallbackQuery, lang_code):
     logger.debug(len(users))
     users_top = [await User.get(user_id) for user_id in get_users_id_top_referral_system(users)]
     if not users_top:
-        await call.answer('Еще никто не не подключен к реферальной программе', cache_time=60)
+        await call.answer(text[lang_code].default.message.no_one_in_ref_system, cache_time=60)
         return False
 
     user_top_zip = []
@@ -34,7 +34,6 @@ async def show_menu(call: CallbackQuery, lang_code):
                     f'{await db.select([func.count(User.id)]).where(User.deep_link == user.id).gino.scalar()} рефералов\n'
     await call.message.edit_text(
         text=text[lang_code].default.message.users_top_referral_system.format(
-            count_users_top=len(users_top),
             user_referral_system_data=text_top
         )
     )

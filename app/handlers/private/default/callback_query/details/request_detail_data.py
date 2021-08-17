@@ -12,7 +12,7 @@ from app.utils.db_api.models.user import User
 async def request_detail_data(call: CallbackQuery, user: User, lang_code):
     await call.message.delete()
     if not user.requisites:
-        list_requisites= []
+        list_requisites = []
     list_requisites = user.requisites.split()
     await call.message.answer(
         text=text[lang_code].default.message.request_detail_data,

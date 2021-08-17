@@ -41,6 +41,6 @@ class MessageForSending(BaseModel):
 
     @property
     def get_roles(self) -> List[str]:
-        if not self.chats_id:
+        if not self.roles:
             return []
         return [role for role in self.roles.split() if role in UserRole.__dict__.values()]
